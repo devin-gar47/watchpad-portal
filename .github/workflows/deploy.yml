@@ -16,6 +16,7 @@ jobs:
       - run: npm test
   
   deploy:
+    needs: build
     name: Deploy to Heroku
     runs-on: ubuntu-latest
 
