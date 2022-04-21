@@ -2,7 +2,7 @@ name: CI/CD for main branch
 
 on:
   push:
-    branch:
+    branches:
       - main
 
 jobs:
