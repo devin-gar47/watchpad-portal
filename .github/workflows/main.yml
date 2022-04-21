@@ -6,18 +6,11 @@ on:
 
 jobs:
   build:
+    name: Build & Test
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Install Dep
-        run: npm install
-    
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
       - run: npm install
       - run: npm test
 
