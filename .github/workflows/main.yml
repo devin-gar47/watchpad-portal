@@ -20,16 +20,16 @@ jobs:
           path: node_modules/
     
     
-    test:
-      runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/download-artifact@v3
-          with:
-            name: download dep folder
-            path: node_modules/
-        
-        - run: npm test
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: download dep folder
+          path: node_modules/
+      
+      - run: npm test
 
 
       
