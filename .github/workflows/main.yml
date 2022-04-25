@@ -4,6 +4,14 @@ on:
     push:
 
 jobs:
+    quality:
+        name: Quality
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+            - run: npm run check-code-format
+
     build:
         name: Build & Test
         runs-on: ubuntu-latest
