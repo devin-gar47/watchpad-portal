@@ -5,8 +5,10 @@ import { Button } from 'react-bootstrap'
 function HomePage() {
     async function testCall() {
         try {
-            const data = await axios.get('http://localhost:8080/hello-world')
-            console.log(data.data)
+            const data = await axios.get(
+                `${process.env.REACT_APP_API_BASE_URL}/hello-world`
+            )
+            console.log(process.env.REACT_APP_API_BASE_URL, data.data)
         } catch (e) {
             console.log(e)
         }
