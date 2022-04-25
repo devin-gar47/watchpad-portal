@@ -1,7 +1,18 @@
+import axios from 'axios'
 import React from 'react'
+import { Button } from 'react-bootstrap'
 
 function HomePage() {
-    return <div>hello</div>
+    async function testCall() {
+        try {
+            const data = await axios.get('http://localhost:8080/hello-world')
+            console.log(data.data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    return <Button onClick={testCall}>Test</Button>
 }
 
 export default HomePage
