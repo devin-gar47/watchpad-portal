@@ -2,8 +2,6 @@ name: CI/CD for main branch
 
 on:
     push:
-        branches:
-            - main
 
 jobs:
     build:
@@ -19,6 +17,7 @@ jobs:
         needs: build
         name: Deploy to Heroku
         runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/master'
 
         steps:
             - uses: actions/checkout@v3
