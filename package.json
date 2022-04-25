@@ -23,9 +23,10 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test --watchAll=false",
+        "test": "react-scripts test --watchAll=false --collectCoverage=true",
         "eject": "react-scripts eject",
-        "pre-push": "npx prettier --write . && npm test && git add . && git status"
+        "pre-push": "npx prettier --write . && npm test && git add . && git status",
+        "check-code-format": "npx prettier --check ."
     },
     "eslintConfig": {
         "extends": [
