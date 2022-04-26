@@ -9,11 +9,17 @@ function HomePage() {
                 `${process.env.REACT_APP_API_BASE_URL}/hello-world`
             )
             console.log(
+                'SUCCESS',
                 process.env.NODE_ENV,
                 process.env.REACT_APP_API_BASE_URL,
                 data.data
             )
         } catch (e) {
+            console.log(
+                'FAILURE',
+                process.env.NODE_ENV,
+                process.env.REACT_APP_API_BASE_URL
+            )
             console.log(e)
         }
     }
