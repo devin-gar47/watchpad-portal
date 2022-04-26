@@ -18,10 +18,12 @@
         "react-scripts": "^5.0.1",
         "redux": "^4.2.0",
         "redux-persist": "^6.0.0",
+        "serve": "^13.0.2",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
         "start": "react-scripts start",
+        "production": "export NODE_ENV=production && react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --watchAll=false --collectCoverage=true",
         "eject": "react-scripts eject",
