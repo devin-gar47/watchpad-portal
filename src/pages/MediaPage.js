@@ -1,9 +1,11 @@
 import axios from 'axios'
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import '../components/Media.css'
 
+const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
     let params = useParams()
 
@@ -31,10 +33,23 @@ function MediaPage() {
         return data
     }
 
-    getMovieInfo()
+    useEffect(() => {
+        getMovieInfo()
+    }, [])
 
-    let string = `Title: ${movie.title}, Id: ${params.movieId}, ${movie.overview} `
-    return <h1> {string} </h1>
+    return (
+        <>
+            <h1> {movie.title} </h1>
+            <img
+                key={movie.id}
+                className="media_poster"
+                src={`${base_url}${movie.poster_path}`}
+                alt={movie.title}
+            />
+            <h2> Id: {params.movieId} </h2>
+            <h3> {movie.overview} </h3>
+        </>
+    )
 }
 
 export default MediaPage
