@@ -6,6 +6,15 @@ function NavigationBar() {
     return (
         <Navbar bg="light" expand="lg" className="px-2">
             <Navbar.Brand href="/">WatchPad</Navbar.Brand>
+            <div class="col-4">
+                <div class="input-group">
+                    <input
+                        class="form-control border-secondary py-2"
+                        type="search"
+                        placeholder="search"
+                    />
+                </div>
+            </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
