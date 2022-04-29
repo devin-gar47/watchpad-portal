@@ -6,10 +6,10 @@ function NavigationBar() {
     return (
         <Navbar bg="light" expand="lg" className="px-2">
             <Navbar.Brand href="/">WatchPad</Navbar.Brand>
-            <div class="col-4">
-                <div class="input-group">
+            <div className="col-4">
+                <div className="input-group">
                     <input
-                        class="form-control border-secondary py-2"
+                        className="form-control border-secondary py-2"
                         type="search"
                         placeholder="search"
                     />
@@ -19,7 +19,7 @@ function NavigationBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/media">Media</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link href="/something">Something Else</Nav.Link>
