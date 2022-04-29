@@ -3,10 +3,9 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 
-
 function MediaPage() {
-    let params = useParams();
-    return <h1>Movie Id: {params.movieId}</h1>;
+    let params = useParams()
+    return <h1>Movie Id: {params.movieId}</h1>
     /*
     async function fetchData() {
     let fetchUrl = `https://api.themoviedb.org/3/movie/${params.movieId}?${process.env.REACT_APP_APIKEY}=&language=en-US`

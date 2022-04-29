@@ -14,11 +14,10 @@ function App() {
             <NavigationBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/Media/:movieId" element={<MediaPage/>} />
+                <Route path="/Media/:movieId" element={<MediaPage />} />
             </Routes>
-        
         </Container>
     )
-} 
+}
 
 export default App
