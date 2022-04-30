@@ -1,8 +1,11 @@
 import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { useSelector } from 'react-redux'
 
 function NavigationBar() {
+    const userInformation = useSelector((store) => store.userInformation)
+
     return (
         <Navbar
             bg="light"
@@ -27,9 +30,15 @@ function NavigationBar() {
                     <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
                 <Nav className="align-items-center">
-                    <Nav.Link href="/login">Login</Nav.Link>
-                    <span>/</span>
-                    <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                    {!Object.keys(userInformation).length ? (
+                        <>
+                            <Nav.Link href="/login">Login</Nav.Link>
+                            <span>/</span>
+                            <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                        </>
+                    ) : (
+                        <span>Welcome, user!</span>
+                    )}
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

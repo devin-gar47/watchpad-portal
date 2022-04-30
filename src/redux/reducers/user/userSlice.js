@@ -3,7 +3,7 @@ import { clone } from 'ramda'
 
 export const userSlice = createSlice({
     name: 'User Information',
-    initialState: { isLoggedIn: false },
+    initialState: {},
     reducers: {
         loginSuccess: (state, action) => {
             const newObj = clone(state)
