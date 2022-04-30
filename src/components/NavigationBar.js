@@ -4,7 +4,12 @@ import Navbar from 'react-bootstrap/Navbar'
 
 function NavigationBar() {
     return (
-        <Navbar bg="light" expand="lg" className="px-2">
+        <Navbar
+            bg="light"
+            expand="lg"
+            className="px-2 flex-shrink-0"
+            fixed="top"
+        >
             <Navbar.Brand href="/">WatchPad</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
