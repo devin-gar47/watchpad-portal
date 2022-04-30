@@ -7,7 +7,7 @@ function NavigationBar() {
         <Navbar
             bg="light"
             expand="lg"
-            className="px-2 flex-shrink-0"
+            className="px-2 flex-shrink-0 align-items-center"
             fixed="top"
         >
             <Navbar.Brand href="/">WatchPad</Navbar.Brand>
@@ -26,8 +26,10 @@ function NavigationBar() {
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
-                <Nav>
-                    <Nav.Link href="/something">Something Else</Nav.Link>
+                <Nav className="align-items-center">
+                    <Nav.Link href="/login">Login</Nav.Link>
+                    <span>/</span>
+                    <Nav.Link href="/sign-up">Sign Up</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
