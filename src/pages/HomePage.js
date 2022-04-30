@@ -1,8 +1,12 @@
 import axios from 'axios'
 import React from 'react'
 import { Button } from 'react-bootstrap'
+import Row from '../components/Row'
+import requests from '../requests'
 
 function HomePage() {
+    return <Row title="Trending Now" fetchUrl={requests.fetchPopular} />
+    /*
     async function testCall() {
         try {
             const data = await axios.get(
@@ -25,5 +29,6 @@ function HomePage() {
     }
     return <Button onClick={testCall}>Test</Button>
 }
-
+*/
+}
 export default HomePage

@@ -1,0 +1,21 @@
+.media {
+    margin-left: 20px;
+}
+.media_posters {
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: 20px;
+}
+
+.media_posters::-webkit-scrollbar {
+    display: none;
+}
+
+.media_poster {
+    object-fit: contain;
+    width: 100%;
+    max-height: 500px;
+    margin-right: auto;
+    transition: transform 450ms;
+}

@@ -11,11 +11,20 @@ function NavigationBar() {
             fixed="top"
         >
             <Navbar.Brand href="/">WatchPad</Navbar.Brand>
+            <div className="col-4">
+                <div className="input-group">
+                    <input
+                        className="form-control border-secondary py-2"
+                        type="search"
+                        placeholder="search"
+                    />
+                </div>
+            </div>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/media">Media</Nav.Link>
+                    <Nav.Link href="/profile">Profile</Nav.Link>
                 </Nav>
                 <Nav>
                     <Nav.Link href="/something">Something Else</Nav.Link>
