@@ -5,8 +5,8 @@ import NavigationBar from './components/NavigationBar'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import MediaPage from './pages/MediaPage'
-import Row from './components/Row'
-import requests from './requests'
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
 
 function App() {
     return (
@@ -14,6 +14,8 @@ function App() {
             <NavigationBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/sign-up" element={<SignupPage />} />
                 <Route path="/Media/:movieId" element={<MediaPage />} />
             </Routes>
         </Container>
