@@ -5,7 +5,13 @@ import Row from '../components/Row'
 import requests from '../requests'
 
 function HomePage() {
-    return <Row title="Trending Now" fetchUrl={requests.fetchPopular} />
+    return (
+        <Row
+            title="Trending Now"
+            fetchUrl={requests.fetchPopular}
+            className="body"
+        />
+    )
     /*
     async function testCall() {
         try {
