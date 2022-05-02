@@ -12,7 +12,9 @@ const myStore = configureStore({
     devTools: true,
 })
 
-it('should trigger email onchange event', () => {
+let getByTestIdFunc
+
+beforeAll(() => {
     const setIsLoadingMock = jest.fn()
     const history = createMemoryHistory()
     const { getByTestId } = render(
@@ -23,39 +25,24 @@ it('should trigger email onchange event', () => {
         </Provider>
     )
 
-    const emailInputBox = getByTestId('login-form-email-input-box')
+    getByTestIdFunc = getByTestId
+})
+
+it('should trigger email onchange event', () => {
+    const emailInputBox = getByTestIdFunc('login-form-email-input-box')
     expect(emailInputBox.value).toEqual('')
     fireEvent.change(emailInputBox, { target: { value: 'test@gmail.com' } })
     expect(emailInputBox.value).toEqual('test@gmail.com')
 })
 
 it('should trigger password change event', () => {
-    const setIsLoadingMock = jest.fn()
-    const history = createMemoryHistory()
-    const { getByTestId } = render(
-        <Provider store={myStore}>
-            <Router location={history.location} navigator={history}>
-                <LoginForm setIsLoading={setIsLoadingMock} />
-            </Router>
-        </Provider>
-    )
-
-    const passwordInputBox = getByTestId('login-form-password-input-box')
+    const passwordInputBox = getByTestIdFunc('login-form-password-input-box')
     expect(passwordInputBox.value).toEqual('')
     fireEvent.change(passwordInputBox, { target: { value: 'password' } })
     expect(passwordInputBox.value).toEqual('password')
 })
 
 it('should trigger form handleSubmit function', () => {
-    const setIsLoadingMock = jest.fn()
-    const history = createMemoryHistory()
-    const { getByTestId } = render(
-        <Provider store={myStore}>
-            <Router location={history.location} navigator={history}>
-                <LoginForm setIsLoading={setIsLoadingMock} />
-            </Router>
-        </Provider>
-    )
-    const form = getByTestId('login-form')
+    const form = getByTestIdFunc('login-form')
     fireEvent.submit(form)
 })
