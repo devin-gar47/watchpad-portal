@@ -3,12 +3,11 @@ import React, { useState } from 'react'
 import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
 
-function SignupForm({ setIsLoading }) {
+function SignupForm({ setIsLoading, setError, error }) {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [error, setError] = useState('')
     const [usernameValidation, setUsernameValidation] = useState('')
     const [emailValidation, setEmailValidation] = useState('')
     const [passwordValidation, setPasswordValidation] = useState('')
@@ -84,13 +83,13 @@ function SignupForm({ setIsLoading }) {
             setIsLoading(false)
         } catch (err) {
             if (!err.response) {
-                setError('Server currently is not running.')
                 setIsLoading(false)
+                setError('Server currently is not running.')
                 return
             }
             const errorMessage = err?.response?.data
-            setError(errorMessage)
             setIsLoading(false)
+            setError(errorMessage)
         }
     }
     return (

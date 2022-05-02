@@ -5,10 +5,9 @@ import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { loginSuccess } from '../redux/reducers/user/userSlice'
 
-function LoginForm({ setIsLoading }) {
+function LoginForm({ setIsLoading, setError, error }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -45,16 +44,7 @@ function LoginForm({ setIsLoading }) {
             </Alert>
             <Form
                 className="text-center"
-                onSubmit={(e) =>
-                    handleLoginSubmit(
-                        e,
-                        email,
-                        password,
-                        setIsLoading,
-                        setError,
-                        navigate
-                    )
-                }
+                onSubmit={(e) => handleLoginSubmit(e)}
                 data-testid="login-form"
             >
                 <h4>Member Login</h4>

@@ -6,6 +6,7 @@ import logo from '../static/watchpad_logo.png'
 
 function LoginPage() {
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
 
     return (
         <>
@@ -21,7 +22,11 @@ function LoginPage() {
                             data-testid="login-form-container"
                         >
                             {!isLoading ? (
-                                <LoginForm setIsLoading={setIsLoading} />
+                                <LoginForm
+                                    setIsLoading={setIsLoading}
+                                    setError={setError}
+                                    error={error}
+                                />
                             ) : (
                                 <Loading message="Trying to log you in... hang tight!" />
                             )}

@@ -5,6 +5,7 @@ import Loading from '../components/Loading'
 
 function SignupPage() {
     const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState('')
 
     return (
         <>
@@ -14,7 +15,11 @@ function SignupPage() {
                     className="shadow p-5 rounded justify-content-center align-items-center text-center"
                 >
                     {!isLoading ? (
-                        <SignupForm setIsLoading={setIsLoading} />
+                        <SignupForm
+                            setIsLoading={setIsLoading}
+                            setError={setError}
+                            error={error}
+                        />
                     ) : (
                         <Loading message="Attempting to sign you up..." />
                     )}
