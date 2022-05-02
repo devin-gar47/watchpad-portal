@@ -22,7 +22,6 @@ it('should trigger email onchange event', () => {
             </Router>
         </Provider>
     )
-
     const emailInputBox = getByTestId('login-form-email-input-box')
     expect(emailInputBox.value).toEqual('')
     fireEvent.change(emailInputBox, { target: { value: 'test@gmail.com' } })
@@ -56,6 +55,7 @@ it('should trigger form handleSubmit function', () => {
             </Router>
         </Provider>
     )
+
     const form = getByTestId('login-form')
     fireEvent.submit(form)
 })
