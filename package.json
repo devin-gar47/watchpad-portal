@@ -25,7 +25,7 @@
     "scripts": {
         "start": "react-scripts start",
         "production": "export NODE_ENV=production && react-scripts start",
-        "build": "env-cmd -f ./.env.production react-scripts build",
+        "build": "react-scripts build",
         "test": "react-scripts test --watchAll=false --collectCoverage=true",
         "eject": "react-scripts eject",
         "format": "npx prettier --write ./src",
