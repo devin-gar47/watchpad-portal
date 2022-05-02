@@ -5,6 +5,4 @@ const requests = {
     //fetchMovie: `/movie/${params.movieId}?api_key=<${process.env.REACT_APP_APIKEY}&language=en-US`
 }
 
-
-
 export default requests
