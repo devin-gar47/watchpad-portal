@@ -4,6 +4,7 @@ import { Button, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../components/Media.css'
+import CommentBox from '../components/CommentBox'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
@@ -48,6 +49,7 @@ function MediaPage() {
             />
             <h2> Id: {params.movieId} </h2>
             <h3> {movie.overview} </h3>
+            <CommentBox />
         </>
     )
 }
