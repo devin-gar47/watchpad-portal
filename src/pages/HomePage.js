@@ -5,10 +5,7 @@ import requests from '../requests'
 function HomePage() {
     return (
         <div className="body">
-            <Row
-                title="Trending Now"
-                fetchUrl={requests.fetchPopular}
-            />
+            <Row title="Trending Now" fetchUrl={requests.fetchPopular} />
             <Row
                 title="Recommended For You"
                 fetchUrl={requests.fetchTopRated}
