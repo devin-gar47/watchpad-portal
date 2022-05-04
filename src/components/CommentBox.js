@@ -11,15 +11,20 @@ function CommentBox() {
                 <p>replies test2</p>
             </div>
             <div>
-                <form style={{ display: 'flex' }}>
+                <form>
                     <textarea
                         style={{ width: '100%' }}
                         placeholder="Write your comment here"
                     ></textarea>
+                    <br />
+                    <input
+                        type="submit"
+                        class="btn btn-block btn-primary"
+                        value="Submit"
+                    />
                 </form>
             </div>
             <br />
-            <Button>Add Comment</Button>
         </div>
     )
 }
