@@ -1,11 +1,15 @@
-import axios from 'axios'
 import React from 'react'
-import { Button } from 'react-bootstrap'
 import Row from '../components/Row'
 import requests from '../requests'
 
 function HomePage() {
-    return <Row title="Trending Now" fetchUrl={requests.fetchPopular} />
+    return (
+        <Row
+            title="Trending Now"
+            fetchUrl={requests.fetchPopular}
+            className="body"
+        />
+    )
     /*
     async function testCall() {
         try {

@@ -11,6 +11,9 @@
 .media_posters::-webkit-scrollbar {
     display: none;
 }
+body {
+    padding-top: 70px;
+}
 
 .media_poster {
     object-fit: contain;

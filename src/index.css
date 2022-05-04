@@ -11,3 +11,8 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+.initial-page-height {
+    height: calc(100vh - 56px);
+    margin-top: 56px !important;
+}
