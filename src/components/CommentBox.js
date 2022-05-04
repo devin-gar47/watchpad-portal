@@ -39,11 +39,6 @@ function CommentBox() {
                     >
                         Submit
                     </Button>
-                    <input
-                        type="submit"
-                        class="btn btn-block btn-primary"
-                        value="Submit"
-                    />
                 </form>
             </div>
             <br />
