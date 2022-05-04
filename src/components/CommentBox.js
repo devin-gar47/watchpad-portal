@@ -19,12 +19,10 @@ function CommentBox() {
 
             <div>
                 <form>
-<<<<<<< HEAD
                     {comments.map((comment) => (
                         <p>{comment}</p> //loops(map) through array of useState and prints each element in the array then returns list<li> or <p> items of elements in the array
                     ))}
-=======
->>>>>>> 62c1345715d32ba3186fdc38a37a369302306914
+
                     <textarea
                         type="text"
                         style={{ width: '100%' }}
@@ -33,7 +31,6 @@ function CommentBox() {
                         onChange={(event) => setInput(event.target.value)} //every time user types, state gets updated above. target = text area field you type in
                     ></textarea>
                     <br />
-<<<<<<< HEAD
 
                     <Button
                         onClick={addComment}
@@ -42,13 +39,11 @@ function CommentBox() {
                     >
                         Submit
                     </Button>
-=======
                     <input
                         type="submit"
                         class="btn btn-block btn-primary"
                         value="Submit"
                     />
->>>>>>> 62c1345715d32ba3186fdc38a37a369302306914
                 </form>
             </div>
             <br />
