@@ -4,11 +4,13 @@ import requests from '../requests'
 
 function HomePage() {
     return (
-        <Row
-            title="Trending Now"
-            fetchUrl={requests.fetchPopular}
-            className="body"
-        />
+        <div className="body">
+            <Row title="Trending Now" fetchUrl={requests.fetchPopular} />
+            <Row
+                title="Recommended For You"
+                fetchUrl={requests.fetchTopRated}
+            />
+        </div>
     )
     /*
     async function testCall() {
