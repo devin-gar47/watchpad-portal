@@ -7,8 +7,10 @@ import HomePage from './pages/HomePage'
 import MediaPage from './pages/MediaPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
-import ProfilePage from './pages/ProfilePage'
-
+import ProfilePage from './pages/profile/ProfilePage'
+import UserInfoPage from './pages/profile/UserInfoPage'
+import FollowingPage from './pages/profile/FollowingPage'
+import WatchHistoryPage from './pages/profile/WatchHistoryPage'
 
 function App() {
     return (
@@ -18,8 +20,12 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/sign-up" element={<SignupPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
                 <Route path="/Media/:movieId" element={<MediaPage />} />
+                <Route path="profile" element={<ProfilePage />}>
+                    <Route path="user-info" element={<UserInfoPage />} />
+                    <Route path="following" element={<FollowingPage />} />
+                    <Route path="watch-history" element={<WatchHistoryPage />} />
+                </Route>
             </Routes>
         </Container>
     )
