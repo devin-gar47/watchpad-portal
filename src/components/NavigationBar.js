@@ -37,7 +37,7 @@ function NavigationBar() {
                             <Nav.Link href="/sign-up">Sign Up</Nav.Link>
                         </>
                     ) : (
-                        <span>Welcome, user!</span>
+                        <span>Welcome, {userInformation.username}!</span>
                     )}
                 </Nav>
             </Navbar.Collapse>
