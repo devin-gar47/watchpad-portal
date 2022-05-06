@@ -24,7 +24,10 @@ function App() {
                 <Route path="profile" element={<ProfilePage />}>
                     <Route path="user-info" element={<UserInfoPage />} />
                     <Route path="following" element={<FollowingPage />} />
-                    <Route path="watch-history" element={<WatchHistoryPage />} />
+                    <Route
+                        path="watch-history"
+                        element={<WatchHistoryPage />}
+                    />
                 </Route>
             </Routes>
         </Container>

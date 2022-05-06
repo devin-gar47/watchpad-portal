@@ -3,27 +3,28 @@ import './Menu.css'
 
 function MenuItem({ item }) {
     return (
-        <div className='menu_item' 
+        <div
+            className="menu_item"
             onClick={() => {
                 console.log('Clicked ' + item.link)
                 window.location.pathname = '/profile' + item.link
             }}
         >
-        { item.label }
+            {item.label}
         </div>
     )
 }
 
 const Menu = ({ items }) => {
     return (
-        <div className='menu_container'>
-            { items.map(item => {
-                return(
+        <div className="menu_container">
+            {items.map((item) => {
+                return (
                     <div key={item.label}>
-                        <MenuItem item={ item } />
+                        <MenuItem item={item} />
                     </div>
-                )})}
-                
+                )
+            })}
         </div>
     )
 }

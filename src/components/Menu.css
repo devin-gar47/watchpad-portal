@@ -4,17 +4,17 @@
 }
 
 .menu_item {
-  align-items: left;
-  color: #000000;
-  display: flex;
-  font-size: 28px;
-  justify-content: left;
-  letter-spacing: 3px;
-  text-align: left;
-  padding: 8px;
+    align-items: left;
+    color: #000000;
+    display: flex;
+    font-size: 28px;
+    justify-content: left;
+    letter-spacing: 3px;
+    text-align: left;
+    padding: 8px;
 }
 
 .menu_item:hover {
-    background: #EEEEEE;
+    background: #eeeeee;
     transform: scale(1.01);
 }

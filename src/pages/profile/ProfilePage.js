@@ -2,28 +2,26 @@ import React from 'react'
 import Menu from '../../components/Menu'
 import { Outlet } from 'react-router-dom'
 
-
 function ProfilePage() {
-
     const menuItems = [
         {
             label: 'USER INFO',
-            link: '/user-info'
+            link: '/user-info',
         },
         {
             label: 'FOLLOWING',
-            link: '/following'
+            link: '/following',
         },
         {
             label: 'WATCH HISTORY',
-            link: '/watch-history'
-        }
-      ]
+            link: '/watch-history',
+        },
+    ]
 
     return (
-        <div style={{ display: "inline-flex", margin: "10px"}}>
+        <div style={{ display: 'inline-flex', margin: '10px' }}>
             <div className="menu">
-                <Menu items={menuItems}/>
+                <Menu items={menuItems} />
             </div>
             <Outlet />
         </div>
