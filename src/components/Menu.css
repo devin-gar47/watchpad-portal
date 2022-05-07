@@ -1,0 +1,20 @@
+.menu_container {
+    height: 100%;
+    width: 350px;
+}
+
+.menu_item {
+    align-items: left;
+    color: #000000;
+    display: flex;
+    font-size: 28px;
+    justify-content: left;
+    letter-spacing: 3px;
+    text-align: left;
+    padding: 8px;
+}
+
+.menu_item:hover {
+    background: #eeeeee;
+    transform: scale(1.01);
+}
