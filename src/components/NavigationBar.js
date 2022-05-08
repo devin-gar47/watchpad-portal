@@ -2,10 +2,21 @@ import React from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
 
+    let navigate = useNavigate()
+    const [textInput, setTextInput] = React.useState('');
+    const handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+            let path = `/search/${textInput}`
+            navigate(path)
+        }
+
+    }
+    
     return (
         <Navbar
             bg="light"
@@ -20,6 +31,8 @@ function NavigationBar() {
                         className="form-control border-secondary py-2"
                         type="search"
                         placeholder="search"
+                        onChange={e => setTextInput(e.target.value)}
+                        onKeyPress={(e) => handleKeyPress(e)}
                     />
                 </div>
             </div>

@@ -11,6 +11,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import UserInfoPage from './pages/profile/UserInfoPage'
 import FollowingPage from './pages/profile/FollowingPage'
 import WatchHistoryPage from './pages/profile/WatchHistoryPage'
+import SearchResults from './pages/SearchResults'
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/sign-up" element={<SignupPage />} />
                 <Route path="/Media/:movieId" element={<MediaPage />} />
+                <Route path="/Search/:searchQuery" element={<SearchResults />}/>
                 <Route path="profile" element={<ProfilePage />}>
                     <Route path="user-info" element={<UserInfoPage />} />
                     <Route path="following" element={<FollowingPage />} />
