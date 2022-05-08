@@ -11,6 +11,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import UserInfoPage from './pages/profile/UserInfoPage'
 import FollowingPage from './pages/profile/FollowingPage'
 import WatchHistoryPage from './pages/profile/WatchHistoryPage'
+import WatchListPage from './pages/profile/WatchListPage'
 
 function App() {
     return (
@@ -28,6 +29,7 @@ function App() {
                         path="watch-history"
                         element={<WatchHistoryPage />}
                     />
+                    <Route path="watchlist" element={<WatchListPage />} />
                 </Route>
             </Routes>
         </Container>
