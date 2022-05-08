@@ -20,8 +20,7 @@ const WatchListPage = () => {
             </div>
         </div>
         */
-        
-        
+
         <div style={{ margin: '10px' }}>
             <div>
                 <Row title="WATCHLIST" fetchUrl={requests.fetchPopular} />

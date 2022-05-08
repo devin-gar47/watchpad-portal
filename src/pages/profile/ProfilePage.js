@@ -19,7 +19,7 @@ function ProfilePage() {
         {
             label: 'WATCHLIST',
             link: '/watchlist',
-        }
+        },
     ]
 
     return (
