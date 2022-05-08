@@ -16,6 +16,10 @@ function ProfilePage() {
             label: 'WATCH HISTORY',
             link: '/watch-history',
         },
+        {
+            label: 'WATCHLIST',
+            link: '/watchlist',
+        },
     ]
 
     return (
