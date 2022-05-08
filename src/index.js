@@ -8,18 +8,32 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './redux/reducers'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
+
+const persistConfig = {
+    key: 'root',
+    storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const myStore = configureStore({
-    reducer: rootReducer,
-    devTools: true,
+    reducer: persistedReducer,
+    devTools: process.env.NODE_ENV !== 'production',
 })
+
+let persistor = persistStore(myStore)
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
     <React.StrictMode>
         <BrowserRouter>
             <Provider store={myStore}>
-                <App />
+                <PersistGate loading={null} persistor={persistor}>
+                    <App />
+                </PersistGate>
             </Provider>
         </BrowserRouter>
     </React.StrictMode>
