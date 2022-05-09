@@ -12,6 +12,7 @@ import UserInfoPage from './pages/profile/UserInfoPage'
 import FollowingPage from './pages/profile/FollowingPage'
 import WatchHistoryPage from './pages/profile/WatchHistoryPage'
 import WatchListPage from './pages/profile/WatchListPage'
+import SearchResults from './pages/SearchResults'
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                     />
                     <Route path="watchlist" element={<WatchListPage />} />
                 </Route>
+                <Route path="search/:searchQuery" element={<SearchResults />} />
             </Routes>
         </Container>
     )

@@ -1,5 +1,7 @@
 import { render } from '@testing-library/react'
 import NavigationBar from '../../components/NavigationBar'
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
 
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
@@ -11,9 +13,13 @@ const myStore = configureStore({
 })
 
 it('should render NavigationBar component correctly', () => {
+    const setIsLoadingMock = jest.fn()
+    const history = createMemoryHistory()
     const { getByText } = render(
         <Provider store={myStore}>
-            <NavigationBar />
+            <Router location={history.location} navigator={history}>
+                <NavigationBar setIsLoading={setIsLoadingMock} />
+            </Router>
         </Provider>
     )
 
