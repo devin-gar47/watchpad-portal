@@ -1,0 +1,15 @@
+.grid_poster {
+    object-fit: contain;
+    max-height: 250px;
+    margin-right: 10px;
+    transition: transform 450ms;
+}
+
+.grid_poster:hover {
+    transform: scale(1.09);
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+}

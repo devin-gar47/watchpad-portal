@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react'
-//import '../components/Grid.css'
+import '../components/Grid.css'
 import { useNavigate } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Col from 'react-bootstrap/Col'
-import Row from 'react-bootstrap/Row'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function Grid({ searchQuery }) {
     const [movies, setMovie] = useState([])
-    let fetchUrl = `https://api.themoviedb.org/3/search/movie/?query=${searchQuery}&api_key=${process.env.REACT_APP_APIKEY}&language=en-US&page=1`
+    let fetchUrl = `https://api.themoviedb.org/3/search/multi/?query=${searchQuery}&api_key=${process.env.REACT_APP_APIKEY}&language=en-US&page=1`
     const getSearchResults = async () => {
         const response = await fetch(fetchUrl)
         const data = await response.json()
@@ -27,21 +24,29 @@ function Grid({ searchQuery }) {
     }
 
     return (
-        <Container fluid>
-            <Row>
-                <Col>
-                    {movies.map((movie) => (
-                        <img
-                            key={movie.id}
-                            onClick={() => handleClick(movie.id, movie.title)}
-                            className="row_poster"
-                            src={`${base_url}${movie.poster_path}`}
-                            alt={movie.title}
-                        />
-                    ))}
-                </Col>
-            </Row>
-        </Container>
+        <div className="movie-page">
+            <div className="container">
+                {movies.length > 0 ? (
+                    <div className="grid">
+                        {movies.map((movie) => (
+                            <img
+                                key={movie.id}
+                                onClick={() =>
+                                    handleClick(movie.id, movie.title)
+                                }
+                                className="grid_poster"
+                                src={`${base_url}${movie.poster_path}`}
+                                alt={movie.title}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <h2 className="no-movies">
+                        No search results could be found.
+                    </h2>
+                )}
+            </div>
+        </div>
     )
 }
 
