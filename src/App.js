@@ -17,7 +17,7 @@ import SearchResults from './pages/SearchResults'
 function App() {
     return (
         <Container fluid className="p-0">
-           <NavigationBar />
+            <NavigationBar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
