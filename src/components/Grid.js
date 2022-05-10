@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import '../components/Grid.css'
 import { useNavigate } from 'react-router-dom'
+import Container from 'react-bootstrap/Container';
+
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function Grid({ searchQuery }) {
     const [movies, setMovie] = useState([])
-    let fetchUrl = `https://api.themoviedb.org/3/search/multi/?query=${searchQuery}&api_key=${process.env.REACT_APP_APIKEY}&language=en-US&page=1`
+    let fetchUrl = `https://api.themoviedb.org/3/search/multi/?api_key=${process.env.REACT_APP_APIKEY}&language=en-US&query=${searchQuery}`
     const getSearchResults = async () => {
         const response = await fetch(fetchUrl)
         const data = await response.json()
@@ -25,7 +27,7 @@ function Grid({ searchQuery }) {
 
     return (
         <div className="movie-page">
-            <div className="container">
+            <Container fluid>
                 {movies.length > 0 ? (
                     <div className="grid">
                         {movies.map((movie) => (
@@ -45,7 +47,7 @@ function Grid({ searchQuery }) {
                         No search results could be found.
                     </h2>
                 )}
-            </div>
+            </Container>
         </div>
     )
 }
