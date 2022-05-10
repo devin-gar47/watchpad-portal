@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../components/Grid.css'
 import { useNavigate } from 'react-router-dom'
-import Container from 'react-bootstrap/Container';
-
+import Container from 'react-bootstrap/Container'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function Grid({ searchQuery }) {
