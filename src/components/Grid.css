@@ -3,6 +3,7 @@
     max-height: 250px;
     margin-right: 10px;
     transition: transform 450ms;
+    padding: 5px;
 }
 
 .grid_poster:hover {
@@ -12,4 +13,8 @@
 .grid {
     display: flex;
     flex-wrap: wrap;
+}
+
+.movie-page {
+    margin-left: 10px;
 }
