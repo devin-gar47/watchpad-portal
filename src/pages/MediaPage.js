@@ -41,14 +41,17 @@ function MediaPage() {
 
     return (
         <>
-            <h1> {movie.title} <LikeDislikes likeCount={0} dislikeCount={0} /></h1>
+            <h1>
+                {' '}
+                {movie.title} <LikeDislikes likeCount={0} dislikeCount={0} />
+            </h1>
             <img
                 key={movie.id}
                 className="media_poster"
                 src={`${base_url}${movie.poster_path}`}
                 alt={movie.title}
             />
-            
+
             <h2> Id: {params.movieId} </h2>
             <h3> {movie.overview} </h3>
             <CommentBox />
