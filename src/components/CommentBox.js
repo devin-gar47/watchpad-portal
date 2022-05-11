@@ -7,16 +7,18 @@ import { useSelector } from 'react-redux'
 
 function CommentBox() {
     let params = useParams()
+    
     const userInformation = useSelector((store) => store.userInformation)
 
     const [comments, setComments] = useState([]) //state that stores the new inputs in an array
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
 
     const addComment = (event) => {
+        
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, {
-                media: params,
-                user: userInformation.id,
+                media: {id: params.movieId},
+                user: {id: userInformation.id},
                 comment_timestamp: '2007-12-03T10:15:30',
                 content: newComment,
                 spoiler: true,
