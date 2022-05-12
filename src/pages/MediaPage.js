@@ -1,15 +1,16 @@
 import axios from 'axios'
 import React from 'react'
-import { Button, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import '../components/Media.css'
 import CommentBox from '../components/CommentBox'
 import LikeDislikes from '../components/LikeDislikes'
+import DurationBar from '../components/DurationBar'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
     let params = useParams()
+    const [runtime, setRuntime] = useState(0)
 
     /*
     async function fetchData() {
@@ -32,6 +33,7 @@ function MediaPage() {
         setMovie(data)
         console.log(movie)
         console.log(data)
+        setRuntime(data.runtime)
         return data
     }
 
@@ -54,6 +56,7 @@ function MediaPage() {
 
             <h2> Id: {params.movieId} </h2>
             <h3> {movie.overview} </h3>
+            <DurationBar runtime={runtime} />
             <CommentBox />
         </>
     )
