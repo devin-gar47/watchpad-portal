@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function Grid({ searchQuery }) {
     const [movies, setMovie] = useState([])
-    let fetchUrl = `https://api.themoviedb.org/3/search/multi/?api_key=${process.env.REACT_APP_APIKEY}&language=en-US&query=${searchQuery}`
+    let fetchUrl = `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_APIKEY}&language=en-US&query=${searchQuery}`
     const getSearchResults = async () => {
         const response = await fetch(fetchUrl)
         const data = await response.json()
