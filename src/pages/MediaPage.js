@@ -6,6 +6,8 @@ import '../components/Media.css'
 import CommentBox from '../components/CommentBox'
 import LikeDislikes from '../components/LikeDislikes'
 import DurationBar from '../components/DurationBar'
+import '../css/Buttons.css'
+import AddWatchlist from '../components/AddWatchlist'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
@@ -43,10 +45,13 @@ function MediaPage() {
 
     return (
         <>
-            <h1>
-                {' '}
-                {movie.title} <LikeDislikes likeCount={0} dislikeCount={0} />
-            </h1>
+            <div>
+                <h1 className="inline-block">
+                    {movie.title} <AddWatchlist />
+                </h1>
+            </div>
+
+            <LikeDislikes likeCount={0} dislikeCount={0} />
             <img
                 key={movie.id}
                 className="media_poster"
