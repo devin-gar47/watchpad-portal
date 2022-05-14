@@ -71,7 +71,7 @@ function MediaPage() {
                 <div
                     style={{
                         color: 'white',
-                        fontSize: '15px',
+                        fontSize: '16px',
                         marginLeft: '10px',
                         marginRight: '500px',
                         backgroundColor: 'black',
