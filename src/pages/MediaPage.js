@@ -73,7 +73,7 @@ function MediaPage() {
                         color: 'white',
                         fontSize: '15px',
                         marginLeft: '10px',
-                        marginRight: '1000px',
+                        marginRight: '500px',
                         backgroundColor: 'black',
                     }}
                 >
