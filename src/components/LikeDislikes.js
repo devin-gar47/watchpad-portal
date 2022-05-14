@@ -84,7 +84,9 @@ function LikeDislikes({ likeCount, dislikeCount }) {
 
     return (
         <>
-            <Button onClick={incrementLikes}>👍 {likes}</Button>
+            <Button className="btnSpacing" onClick={incrementLikes}>
+                👍 {likes}
+            </Button>
             <Button className="btnSpacing" onClick={decrementLikes}>
                 👎 {dislikes}
             </Button>
