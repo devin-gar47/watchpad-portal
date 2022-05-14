@@ -1,5 +1,8 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function LikeDislikes({ likeCount, dislikeCount }) {
     //used props to make it dynamic instead of setting state to 0
@@ -9,6 +12,9 @@ function LikeDislikes({ likeCount, dislikeCount }) {
     //another state used to track if the like/dislike button is already pressed
     const [liked, updateLiked] = useState(false)
     const [disliked, updateDisliked] = useState(false)
+
+    let params = useParams()
+    const userInformation = useSelector((store) => store.userInformation)
 
     //checks to see when to increment/decrement likes based on if the like/dislike buttons are pressed
     const incrementLikes = () => {
@@ -25,6 +31,24 @@ function LikeDislikes({ likeCount, dislikeCount }) {
             }
         }
         console.log('plus 1')
+
+        console.log('media Id ' + params.movieId)
+        console.log('user id ' + userInformation.id)
+
+        axios
+            .post(
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
+                {},
+                {
+                    params: {
+                        userId: userInformation.id,
+                        mediaId: params.movieId,
+                        isLiked: true,
+                    },
+                }
+            )
+            .then((response) => response.status)
+            .catch((err) => console.warn(err))
     }
 
     const decrementLikes = () => {
@@ -41,6 +65,21 @@ function LikeDislikes({ likeCount, dislikeCount }) {
             }
         }
         console.log('minus 1')
+
+        axios
+            .post(
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
+                {},
+                {
+                    params: {
+                        userId: userInformation.id,
+                        mediaId: params.movieId,
+                        isLiked: false,
+                    },
+                }
+            )
+            .then((response) => response.status)
+            .catch((err) => console.warn(err))
     }
 
     return (
