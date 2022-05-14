@@ -32,18 +32,24 @@ function LikeDislikes({ likeCount, dislikeCount }) {
         }
         console.log('plus 1')
 
-        console.log("media Id " + params.movieId);
-        console.log("user id " + userInformation.id);
+        console.log('media Id ' + params.movieId)
+        console.log('user id ' + userInformation.id)
 
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`, {}, { params: {
-            userId : userInformation.id,
-            mediaId : params.movieId,
-            isLiked : true,
-            }})
-                .then(response => response.status)
-                .catch(err => console.warn(err));
-        
-        }
+        axios
+            .post(
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
+                {},
+                {
+                    params: {
+                        userId: userInformation.id,
+                        mediaId: params.movieId,
+                        isLiked: true,
+                    },
+                }
+            )
+            .then((response) => response.status)
+            .catch((err) => console.warn(err))
+    }
 
     const decrementLikes = () => {
         if (disliked) {
@@ -60,15 +66,20 @@ function LikeDislikes({ likeCount, dislikeCount }) {
         }
         console.log('minus 1')
 
-        axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`, {}, { params: {
-            userId : userInformation.id,
-            mediaId : params.movieId,
-            isLiked : false,
-            }})
-                .then(response => response.status)
-                .catch(err => console.warn(err));
-
-        
+        axios
+            .post(
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
+                {},
+                {
+                    params: {
+                        userId: userInformation.id,
+                        mediaId: params.movieId,
+                        isLiked: false,
+                    },
+                }
+            )
+            .then((response) => response.status)
+            .catch((err) => console.warn(err))
     }
 
     return (
