@@ -6,6 +6,7 @@ import '../components/Media.css'
 import CommentBox from '../components/CommentBox'
 import LikeDislikes from '../components/LikeDislikes'
 import DurationBar from '../components/DurationBar'
+import CommentDisplay from '../components/CommentDisplay'
 import '../css/Buttons.css'
 import AddWatchlist from '../components/AddWatchlist'
 
@@ -47,22 +48,44 @@ function MediaPage() {
         <>
             <div>
                 <h1 className="inline-block">
-                    {movie.title} <AddWatchlist />
+                    <p style={{ fontSize: '50px' }}>
+                        {movie.title} :
+                        <small class="text-muted">{params.movieId}</small>
+                    </p>
                 </h1>
             </div>
 
+            <div
+                style={{
+                    display: 'flex',
+                    marginTop: '10px',
+                    marginBottom: '10px',
+                }}
+            >
+                <img
+                    key={movie.id}
+                    height="300px"
+                    src={`${base_url}${movie.poster_path}`}
+                    alt={movie.title}
+                />
+                <div
+                    style={{
+                        color: 'white',
+                        fontSize: '16px',
+                        marginLeft: '10px',
+                        marginRight: '500px',
+                        backgroundColor: 'black',
+                    }}
+                >
+                    {movie.overview}
+                    <CommentDisplay />
+                </div>
+            </div>
             <LikeDislikes likeCount={0} dislikeCount={0} />
-            <img
-                key={movie.id}
-                className="media_poster"
-                src={`${base_url}${movie.poster_path}`}
-                alt={movie.title}
-            />
+            <AddWatchlist />
 
-            <h2> Id: {params.movieId} </h2>
-            <h3> {movie.overview} </h3>
             <DurationBar runtime={runtime} />
-            <CommentBox />
+            <CommentBox mediaId={movie.id} />
         </>
     )
 }

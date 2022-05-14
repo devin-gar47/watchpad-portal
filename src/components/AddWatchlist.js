@@ -4,7 +4,9 @@ import React from 'react'
 function AddWatchlist() {
     return (
         <div>
-            <Button variant="success">Add To WatchList</Button>
+            <Button className="btnSpacing" variant="success">
+                Add To WatchList
+            </Button>
             <Button className="btnSpacing" variant="success">
                 Remove From WatchList
             </Button>
