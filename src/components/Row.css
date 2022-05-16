@@ -1,26 +1,28 @@
 .row {
-    grid-row-start: 20 px;
-    margin-left: 20px;
+    /* grid-row-start: 20 px;
+    margin-left: 20px; */
+    padding: 10px;
 }
+
 .row_posters {
-    display: flex;
-    overflow-y: hidden;
-    overflow-x: scroll;
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
     padding: 20px;
 }
 
 body {
     padding-top: 70px;
 }
-
+/* 
 .row_posters::-webkit-scrollbar {
     display: none;
-}
+} */
 
 .row_poster {
     object-fit: contain;
-    width: 100%;
-    max-height: 200px;
+    max-height: 300px;
     margin-right: 10px;
     transition: transform 450ms;
 }
