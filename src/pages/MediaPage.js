@@ -9,11 +9,17 @@ import DurationBar from '../components/DurationBar'
 import CommentDisplay from '../components/CommentDisplay'
 import '../css/Buttons.css'
 import AddWatchlist from '../components/AddWatchlist'
+import { useSelector } from 'react-redux'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
+    // const userInformation = useSelector((store) => store.userInformation)
+
     let params = useParams()
     const [runtime, setRuntime] = useState(0)
+
+    // const[likesTotal, setLikesTotal] = useState(0)
+    // const[dislikesTotal, setDislikesTotal] = useState(0)
 
     /*
     async function fetchData() {
@@ -40,8 +46,31 @@ function MediaPage() {
         return data
     }
 
+    // const getTotalLikes = async () => {
+    //     const response = await axios.get(
+    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-likes?mediaId=${params.movieId}`
+    //     )
+    //     setLikesTotal(response.data)
+    // }
+
+    // const getTotalDislikes = async () => {
+    //     const response = await axios.get(
+    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-dislikes?mediaId=${params.movieId}`
+    //     )
+    //     setDislikesTotal(response.data)
+    // }
+
+    // const userAlreadyRated = async () => {
+    //     const response = await axios.get(
+    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-rating?mediaId=${params.movieId}&userId=${userInformation.id}`
+    //     )
+    //     setDislikesTotal(response.data)
+    // }
+
     useEffect(() => {
         getMovieInfo()
+        // getTotalLikes();
+        // getTotalDislikes();
     }, [])
 
     return (
@@ -81,9 +110,8 @@ function MediaPage() {
                     <CommentDisplay />
                 </div>
             </div>
-            <LikeDislikes likeCount={0} dislikeCount={0} />
+            <LikeDislikes />
             <AddWatchlist />
-
             <DurationBar runtime={runtime} />
             <CommentBox mediaId={movie.id} />
         </>
