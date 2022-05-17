@@ -1,40 +1,45 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import '../css/Comments.css'
+import Comment from './Comment'
 
 const CommentDisplay = (mediaId) => {
-    let arrayOfComments = []
     let params = useParams()
-    const [comment, setComment] = useState('Waiting for data')
+    const [comment, setComment] = useState([])
 
     const getComments = async () => {
         const response = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-comments-by-media?mediaId=${params.movieId}`
         )
-        console.log(response.data)
-        console.log(response.data.length)
+        // console.log(response.data)
+        // console.log(response.data.length)
 
-        let i = 0
-        for (i = 0; i < response.data.length; i++) {
-            arrayOfComments.push(response.data[i].content)
-        }
-        console.log(arrayOfComments)
-        setComment(arrayOfComments)
+        setComment(response.data)
     }
 
     useEffect(() => {
         getComments()
-    }, [])
+    }, [comment])
+
+    // console.log(typeof(comment))
+    // console.log(comment)
+    // console.log(Array.isArray(comment))
+
+    /*
+return (<div> hi </div>)
+}
+export default CommentDisplay
+*/
 
     return (
-        <div
-            style={{
-                backgroundcolor: 'blue',
-                marginLeft: '20px',
-                marginRight: '300px',
-            }}
-        >
-            {comment}
+        <div className="comments">
+            <h3 className="comments-title"> Comments </h3>
+            <div className="comments-container">
+                {comment.map((c) => (
+                    <Comment key={c.id} comment={c} />
+                ))}
+            </div>
         </div>
     )
 }
