@@ -8,6 +8,7 @@ import LikeDislikes from '../components/LikeDislikes'
 import DurationBar from '../components/DurationBar'
 import CommentDisplay from '../components/CommentDisplay'
 import '../css/Buttons.css'
+import '../css/Comments.css'
 import AddWatchlist from '../components/AddWatchlist'
 import { useSelector } from 'react-redux'
 
@@ -87,8 +88,7 @@ function MediaPage() {
             <div
                 style={{
                     display: 'flex',
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    width: '100%',
                 }}
             >
                 <img
@@ -96,19 +96,24 @@ function MediaPage() {
                     height="300px"
                     src={`${base_url}${movie.poster_path}`}
                     alt={movie.title}
+                    rightMargin="10px"
                 />
-                <div
+
+                <p
                     style={{
-                        color: 'white',
-                        fontSize: '16px',
-                        marginLeft: '10px',
-                        marginRight: '200px',
-                        backgroundColor: 'black',
+                        fontsize: '12px',
+                        boarderColor: 'black',
+                        rightMargin: '30px',
+                        leftMargin: '5px',
+                        width: '30%',
                     }}
                 >
                     {movie.overview}
+                </p>
+                <div className="divider" style={{ width: '20px' }} />
+                <div>
+                    <CommentDisplay />
                 </div>
-                <CommentDisplay />
             </div>
 
             <LikeDislikes />
