@@ -50,26 +50,33 @@ function DurationBar({ runtime }) {
                             min={0}
                             max={runtimeInSeconds}
                             onChange={(e) => changePosition(e)}
+                            data-testid="duration-bar-slider"
                         />
                         <Row>
                             <Col className="text-start">
-                                <span>{convertedPosition}</span>
+                                <span data-testid="duration-bar-converted-position">
+                                    {convertedPosition}
+                                </span>
                             </Col>
                             <Col className="text-center">
                                 {isPaused ? (
                                     <BsPlayFill
                                         onClick={() => handlePauseAndStart()}
                                         className="pause-and-play-button"
+                                        data-testid="play-button"
                                     />
                                 ) : (
                                     <BsFillPauseFill
                                         onClick={() => handlePauseAndStart()}
                                         className="pause-and-play-button"
+                                        data-testid="pause-button"
                                     />
                                 )}
                             </Col>
                             <Col className="text-end">
-                                <span>{toHoursAndMinutes(runtime)}</span>
+                                <span data-testid="duration-bar-converted-runtime">
+                                    {toHoursAndMinutes(runtime)}
+                                </span>
                             </Col>
                         </Row>
                     </Col>
