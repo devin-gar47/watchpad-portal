@@ -31,6 +31,8 @@ function CommentBox() {
         setNewComment('') //clears the text area back to empty after submitting
     }
 
+    
+
     return (
         <div className="commentBox">
             <br />
@@ -47,7 +49,7 @@ function CommentBox() {
                     <br />
 
                     <Button
-                        onClick={addComment}
+                        onClick={addComment} 
                         type="submit"
                         variant="primary"
                     >
