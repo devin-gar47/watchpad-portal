@@ -102,14 +102,15 @@ function MediaPage() {
                         color: 'white',
                         fontSize: '16px',
                         marginLeft: '10px',
-                        marginRight: '500px',
+                        marginRight: '200px',
                         backgroundColor: 'black',
                     }}
                 >
                     {movie.overview}
-                    <CommentDisplay />
                 </div>
+                <CommentDisplay />
             </div>
+
             <LikeDislikes />
             <AddWatchlist />
             <DurationBar runtime={runtime} />
