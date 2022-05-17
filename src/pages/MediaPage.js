@@ -49,7 +49,7 @@ function MediaPage() {
         <>
             <div>
                 <h1 className="inline-block">
-                    <p style={{ fontSize: '50px' }}>
+                    <p className="media_title">
                         {movie.title} :
                         <small class="text-muted">{params.movieId}</small>
                     </p>
@@ -57,6 +57,7 @@ function MediaPage() {
             </div>
 
             <div
+                className="media_poster"
                 style={{
                     display: 'flex',
                     width: '100%',
@@ -64,32 +65,22 @@ function MediaPage() {
             >
                 <img
                     key={movie.id}
-                    height="300px"
+                    height="400px"
                     src={`${base_url}${movie.poster_path}`}
                     alt={movie.title}
                     rightMargin="10px"
                 />
 
-                <p
-                    style={{
-                        fontsize: '12px',
-                        boarderColor: 'black',
-                        rightMargin: '30px',
-                        leftMargin: '5px',
-                        width: '30%',
-                    }}
-                >
-                    {movie.overview}
-                </p>
+                <div className="media_description">{movie.overview}</div>
                 <div className="divider" style={{ width: '20px' }} />
-                <div>
+                <div className="comment_display">
                     <CommentDisplay />
                 </div>
             </div>
-
-            <LikeDislikes likeCount={0} dislikeCount={0} />
-            <AddWatchlist />
-
+            <div className="both_buttons">
+                <LikeDislikes likeCount={0} dislikeCount={0} />
+                <AddWatchlist />
+            </div>
             <DurationBar runtime={runtime} />
             <CommentBox mediaId={movie.id} />
         </>

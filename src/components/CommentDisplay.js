@@ -34,7 +34,7 @@ export default CommentDisplay
 
     return (
         <div className="comments">
-            <h3 className="comments-title"> Comments </h3>
+            <h3 className="comments-title"> Reviews </h3>
             <div className="comments-container">
                 {comment.map((c) => (
                     <Comment key={c.id} comment={c} />
