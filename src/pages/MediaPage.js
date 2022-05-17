@@ -109,7 +109,7 @@ function MediaPage() {
 
             <div className="both_buttons">
                 <LikeDislikes />
-            <AddWatchlist />
+                <AddWatchlist />
             </div>
 
             <DurationBar runtime={runtime} />
