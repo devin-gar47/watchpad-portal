@@ -25,12 +25,17 @@ function CommentBox() {
         currentDate.getMinutes() +
         ':' +
         currentDate.getSeconds()
+
+    var stringDate = date.toString()
+    console.log(typeof stringDate)
+    console.log(stringDate)
     const addComment = (event) => {
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, {
                 media: { id: params.movieId },
                 user: { id: userInformation.id },
-                comment_timestamp: '2007-12-03T10:15:30',
+                comment_timestamp: stringDate,
+                comment_duration: null,
                 content: newComment,
                 spoiler: true,
             })
