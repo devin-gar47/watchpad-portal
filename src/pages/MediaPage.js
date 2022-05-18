@@ -11,6 +11,7 @@ import '../css/Buttons.css'
 import '../css/Comments.css'
 import AddWatchlist from '../components/AddWatchlist'
 import { useSelector } from 'react-redux'
+import DurationComments from '../components/DurationComments'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
@@ -113,6 +114,7 @@ function MediaPage() {
             </div>
 
             <DurationBar runtime={runtime} />
+            <DurationComments mediaId={movie.id} />
             <CommentBox mediaId={movie.id} />
         </>
     )
