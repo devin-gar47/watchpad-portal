@@ -3,10 +3,15 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import '../css/Comments.css'
 import Comment from './Comment'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMediaComments } from '../redux/reducers/comment/commentSlice'
 
 const CommentDisplay = (mediaId) => {
     let params = useParams()
     const [comment, setComment] = useState([])
+    const mediaComments = useSelector((store) => store.mediaComments)
+
+    const dispatch = useDispatch()
 
     const getComments = async () => {
         const response = await axios.get(
@@ -15,12 +20,12 @@ const CommentDisplay = (mediaId) => {
         // console.log(response.data)
         // console.log(response.data.length)
 
-        setComment(response.data)
+        dispatch(setMediaComments(response.data))
     }
 
     useEffect(() => {
         getComments()
-    }, [comment])
+    }, [])
 
     // console.log(typeof(comment))
     // console.log(comment)
@@ -36,7 +41,7 @@ export default CommentDisplay
         <div className="comments">
             <h3 className="comments-title"> Reviews </h3>
             <div className="comments-container">
-                {comment.map((c) => (
+                {mediaComments.map((c) => (
                     <Comment key={c.id} comment={c} />
                 ))}
             </div>
