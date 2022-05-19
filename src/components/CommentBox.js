@@ -12,13 +12,30 @@ function CommentBox() {
 
     const [comments, setComments] = useState([]) //state that stores the new inputs in an array
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
+    var currentDate = new Date()
+    var date =
+        currentDate.getFullYear() +
+        '-' +
+        (currentDate.getMonth() + 1) +
+        '-' +
+        currentDate.getDate() +
+        ' ' +
+        currentDate.getHours() +
+        ':' +
+        currentDate.getMinutes() +
+        ':' +
+        currentDate.getSeconds()
 
+    var stringDate = date.toString()
+    console.log(typeof stringDate)
+    console.log(stringDate)
     const addComment = (event) => {
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, {
                 media: { id: params.movieId },
                 user: { id: userInformation.id },
-                comment_timestamp: '2007-12-03T10:15:30',
+                comment_timestamp: stringDate,
+                comment_duration: null,
                 content: newComment,
                 spoiler: true,
             })

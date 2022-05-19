@@ -8,8 +8,10 @@ import LikeDislikes from '../components/LikeDislikes'
 import DurationBar from '../components/DurationBar'
 import CommentDisplay from '../components/CommentDisplay'
 import '../css/Buttons.css'
+import '../css/Comments.css'
 import AddWatchlist from '../components/AddWatchlist'
 import { useSelector } from 'react-redux'
+import DurationComments from '../components/DurationComments'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
@@ -77,7 +79,7 @@ function MediaPage() {
         <>
             <div>
                 <h1 className="inline-block">
-                    <p style={{ fontSize: '50px' }}>
+                    <p className="media_title">
                         {movie.title} :
                         <small class="text-muted">{params.movieId}</small>
                     </p>
@@ -85,34 +87,34 @@ function MediaPage() {
             </div>
 
             <div
+                className="media_poster"
                 style={{
                     display: 'flex',
-                    marginTop: '10px',
-                    marginBottom: '10px',
+                    width: '100%',
                 }}
             >
                 <img
                     key={movie.id}
-                    height="300px"
+                    height="400px"
                     src={`${base_url}${movie.poster_path}`}
                     alt={movie.title}
+                    rightMargin="10px"
                 />
-                <div
-                    style={{
-                        color: 'white',
-                        fontSize: '16px',
-                        marginLeft: '10px',
-                        marginRight: '500px',
-                        backgroundColor: 'black',
-                    }}
-                >
-                    {movie.overview}
+
+                <div className="media_description">{movie.overview}</div>
+                <div className="divider" style={{ width: '20px' }} />
+                <div className="comment_display">
                     <CommentDisplay />
                 </div>
             </div>
-            <LikeDislikes />
-            <AddWatchlist />
+
+            <div className="both_buttons">
+                <LikeDislikes />
+                <AddWatchlist />
+            </div>
+
             <DurationBar runtime={runtime} />
+            <DurationComments mediaId={movie.id} />
             <CommentBox mediaId={movie.id} />
         </>
     )
