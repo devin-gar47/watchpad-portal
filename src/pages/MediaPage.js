@@ -47,6 +47,16 @@ function MediaPage() {
         return data
     }
 
+    const saveMedia = async () => {
+        const response = await axios.post(
+            `${process.env.REACT_APP_API_BASE_URL}/api/media/save-media`,
+            {
+                id: params.movieId,
+            }
+        )
+        console.log(response)
+    }
+
     // const getTotalLikes = async () => {
     //     const response = await axios.get(
     //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-likes?mediaId=${params.movieId}`
@@ -69,6 +79,7 @@ function MediaPage() {
     // }
 
     useEffect(() => {
+        saveMedia()
         getMovieInfo()
         // getTotalLikes();
         // getTotalDislikes();
