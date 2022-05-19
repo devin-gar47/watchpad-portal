@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux'
 import { Button } from 'bootstrap'
 import { useParams } from 'react-router-dom'
 
-
 function Watchlist() {
     let params = useParams()
 
@@ -25,22 +24,16 @@ function Watchlist() {
 
     useEffect(() => {
         displayWatchlist()
-    }
-        , [])
-    
+    }, [])
+
     return (
         <div>
             <h1>Watchlist</h1>
             <ul>
                 {watchlist.map((item) => (
-                    <li key={item.mediaId}>
-                        {item.media.title}
-                    </li>
+                    <li key={item.mediaId}>{item.media.title}</li>
                 ))}
             </ul>
         </div>
     )
-    
-
 }
-

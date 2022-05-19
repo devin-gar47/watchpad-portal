@@ -58,7 +58,6 @@ function MediaPage() {
         console.log(response)
     }
 
-
     // const getTotalLikes = async () => {
     //     const response = await axios.get(
     //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-likes?mediaId=${params.movieId}`
