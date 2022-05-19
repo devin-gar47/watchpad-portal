@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import './CommentBox.css'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { myAddComment } from '../redux/reducers/comment/commentSlice'
 
 function CommentBox() {
     let params = useParams()
+    const dispatch = useDispatch()
 
     const userInformation = useSelector((store) => store.userInformation)
 
@@ -30,20 +32,24 @@ function CommentBox() {
     console.log(typeof stringDate)
     console.log(stringDate)
     const addComment = (event) => {
+        event.preventDefault()
+        const comment = {
+            media: { id: params.movieId },
+            user: { id: userInformation.id },
+            comment_timestamp: stringDate,
+            comment_duration: null,
+            content: newComment,
+            spoiler: true,
+        }
         axios
-            .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, {
-                media: { id: params.movieId },
-                user: { id: userInformation.id },
-                comment_timestamp: stringDate,
-                comment_duration: null,
-                content: newComment,
-                spoiler: true,
-            })
+            .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
                 console.log('Comment Added!')
+                comment.user.username = userInformation.username
+                dispatch(myAddComment(comment))
             })
         // this will activate when submit button is clicked
-        setComments([...comments, newComment]) // ...spread. pushes the new input into the array. keeps what is already inside array and appends new input
+        // setComments([...comments, newComment]) ...spread. pushes the new input into the array. keeps what is already inside array and appends new input
         event.preventDefault() // prevents the page refresh when Submit
         setNewComment('') //clears the text area back to empty after submitting
     }
@@ -64,7 +70,7 @@ function CommentBox() {
                     <br />
 
                     <Button
-                        onClick={addComment}
+                        onClick={(e) => addComment(e)}
                         type="submit"
                         variant="primary"
                     >
