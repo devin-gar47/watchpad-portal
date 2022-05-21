@@ -18,40 +18,41 @@ function LikeDislikes() {
 
     const getTotalLikes = async () => {
         const response = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-likes?mediaId=${params.movieId}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/likes/count-likes?mediaId=${params.movieId}`
         )
         setLikes(response.data)
     }
 
     const getTotalDislikes = async () => {
         const response = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-dislikes?mediaId=${params.movieId}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/likes/count-dislikes?mediaId=${params.movieId}`
         )
         setDislikes(response.data)
     }
 
     const currentUserRating = async () => {
         const response = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-rating?mediaId=${params.movieId}&userId=${userInformation.id}`
-        )
-        console.log(
-            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-rating?mediaId=${params.movieId}&userId=${userInformation.id}`
+            `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/likes/get-like?mediaId=${params.movieId}&userId=${userInformation.id}`
         )
 
-        if (response.data.isLiked !== undefined) {
+        if (response.data !== null) {
             //if user likes already, response.data will be TRUE
-            if (response.data.isLiked) {
+            if (response.data.isLiked == true) {
                 updateLiked(1)
+                console.log('LOGGED IN USER LIKES THIS')
             } else {
                 updateDisliked(1)
+                console.log('LOGGED IN USER DISLIKES THIS')
             }
+        } else {
+            console.log('USER HAS NOT LIKED OR DISLIKED THIS')
         }
     }
 
     const saveUserRating = async (userRatingToSave) => {
         axios
             .post(
-                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/likes/save-like`,
                 {},
                 {
                     params: {
@@ -68,7 +69,7 @@ function LikeDislikes() {
     const deleteUserRating = async () => {
         axios
             .post(
-                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/delete-rating`,
+                `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/likes/delete-like`,
                 {},
                 {
                     params: {
@@ -85,73 +86,41 @@ function LikeDislikes() {
         getTotalLikes()
         getTotalDislikes()
         currentUserRating()
-    }, [likes, dislikes, liked, disliked])
+    }, [])
 
     //checks to see when to increment/decrement likes based on if the like/dislike buttons are pressed
     const clikedLike = () => {
         if (liked) {
-            updateLiked(false)
+            updateLiked(0)
             setLikes(likes - 1)
-
             deleteUserRating()
         } else {
-            updateLiked(true)
+            updateLiked(1)
             setLikes(likes + 1)
             if (disliked) {
-                updateDisliked(false)
+                updateDisliked(0)
                 setLikes(likes + 1)
                 setDislikes(disliked - 1)
             }
             saveUserRating(true)
         }
-
-        // axios
-        //     .post(
-        //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
-        //         {},
-        //         {
-        //             params: {
-        //                 userId: userInformation.id,
-        //                 mediaId: params.movieId,
-        //                 isLiked: true,
-        //             },
-        //         }
-        //     )
-        //     .then((response) => response.status)
-        //     .catch((err) => console.warn(err))
     }
 
     const clickedDislike = () => {
         if (disliked) {
-            updateDisliked(false)
+            updateDisliked(0)
             setDislikes(dislikes - 1)
-
             deleteUserRating()
         } else {
-            updateDisliked(true)
+            updateDisliked(1)
             setDislikes(dislikes + 1)
             if (liked) {
-                updateLiked(false)
+                updateLiked(0)
                 setDislikes(dislikes + 1)
                 setLikes(likes - 1)
             }
             saveUserRating(false)
         }
-
-        // axios
-        //     .post(
-        //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating`,
-        //         {},
-        //         {
-        //             params: {
-        //                 userId: userInformation.id,
-        //                 mediaId: params.movieId,
-        //                 isLiked: false,
-        //             },
-        //         }
-        //     )
-        //     .then((response) => response.status)
-        //     .catch((err) => console.warn(err))
     }
 
     return (
