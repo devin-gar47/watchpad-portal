@@ -1,3 +1,31 @@
+/* :root{
+    --background: #ffffff;
+    --border: #191919;
+    --text-primary: #000000;
+    --text-secondary: #343434;
+    --accent: #b64152;
+    --accent2:#e48652;
+}
+
+
+[data-theme='dark'] {
+    --background: #191919;
+    --border: #f5f5f5;
+    --text-primary: #f5f5f5;
+    --text-secondary: #c6c6c6;
+    --accent: #e45267;
+    --accent2:#52e4cf;
+} */
+
+.ant-layout-header,
+.ant-layout-sider,
+.ant-layout-sider-dark,
+.ant-layout,
+.ant-layout-has-sider,
+.class {
+    background-color: #f8f9fa !important;
+}
+
 .App {
     text-align: center;
 }

@@ -1,8 +1,9 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
-import { Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Button, Col, Row } from 'antd'
+import { DislikeFilled, LikeFilled } from '@ant-design/icons'
 
 function LikeDislikes() {
     const userInformation = useSelector((store) => store.userInformation)
@@ -89,7 +90,7 @@ function LikeDislikes() {
     }, [])
 
     //checks to see when to increment/decrement likes based on if the like/dislike buttons are pressed
-    const clikedLike = () => {
+    const clickedLike = () => {
         if (liked) {
             updateLiked(0)
             setLikes(likes - 1)
@@ -124,14 +125,26 @@ function LikeDislikes() {
     }
 
     return (
-        <>
-            <Button className="btnSpacing" onClick={clikedLike}>
-                👍 {likes}
-            </Button>
-            <Button className="btnSpacing" onClick={clickedDislike}>
-                👎 {dislikes}
-            </Button>
-        </>
+        <Row align="middle" justify="space-evenly">
+            <Col>
+                <Button
+                    type="primary"
+                    shape="circle"
+                    icon={<LikeFilled />}
+                    onClick={clickedLike}
+                />
+            </Col>
+            <Col>{likes}</Col>
+            <Col>
+                <Button
+                    type="primary"
+                    shape="circle"
+                    icon={<DislikeFilled />}
+                    onClick={clickedDislike}
+                />
+            </Col>
+            <Col>{dislikes}</Col>
+        </Row>
     )
 }
 

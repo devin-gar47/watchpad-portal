@@ -15,6 +15,11 @@ import WatchListPage from './pages/profile/WatchListPage'
 import SearchResults from './pages/SearchResults'
 
 function App() {
+    // const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light')
+    // const switchTheme = () => {
+    //     const newTheme = theme === 'light' ? 'dark' : 'light'
+    //     setTheme(newTheme)
+    // }
     return (
         <Container fluid className="p-0">
             <NavigationBar />
