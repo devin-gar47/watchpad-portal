@@ -40,8 +40,12 @@ function NavigationBar() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                     <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/profile">Profile</Nav.Link>
-                    <Nav.Link href="/profile/watchlist">Watchlist</Nav.Link>
+                    <Nav.Link href={`/${userInformation.username}`}>
+                        Profile
+                    </Nav.Link>
+                    <Nav.Link href={`/${userInformation.username}/watchlist`}>
+                        Watchlist
+                    </Nav.Link>
                 </Nav>
                 <Nav className="align-items-center">
                     {!Object.keys(userInformation).length ? (

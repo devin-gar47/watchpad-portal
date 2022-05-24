@@ -28,7 +28,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/sign-up" element={<SignupPage />} />
                 <Route path="/Media/:movieId" element={<MediaPage />} />
-                <Route path="profile" element={<ProfilePage />}>
+                <Route path="/:username" element={<ProfilePage />}>
                     <Route path="user-info" element={<UserInfoPage />} />
                     <Route path="following" element={<FollowingPage />} />
                     <Route

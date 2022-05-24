@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Button } from 'bootstrap'
-import { useParams } from 'react-router-dom'
 
 function Watchlist() {
     let params = useParams()
