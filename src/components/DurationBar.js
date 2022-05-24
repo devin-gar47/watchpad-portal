@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
-import { BsPlayFill, BsFillPauseFill } from 'react-icons/bs'
+import {
+    BsPlayFill,
+    BsFillPauseFill,
+    BsFillSkipStartFill,
+    BsArrowClockwise,
+    BsArrowCounterclockwise,
+} from 'react-icons/bs'
 import {
     toHoursAndMinutes,
     toHoursMinutesAndSeconds,
@@ -21,6 +27,26 @@ function DurationBar({ runtime }) {
     function handlePauseAndStart() {
         if (currentPosition >= runtimeInSeconds) setCurrentPosition(0)
         setIsPaused(!isPaused)
+    }
+
+    function handleRestart() {
+        setCurrentPosition(0)
+    }
+
+    function handleSkipBackward() {
+        if (currentPosition - 10 < 0) {
+            setCurrentPosition(0)
+        } else {
+            setCurrentPosition(currentPosition - 10)
+        }
+    }
+
+    function handleSkipForward() {
+        if (currentPosition >= runtimeInSeconds) {
+            setCurrentPosition(runtimeInSeconds)
+        } else {
+            setCurrentPosition(currentPosition + 10)
+        }
     }
 
     useEffect(() => {
@@ -72,6 +98,21 @@ function DurationBar({ runtime }) {
                                         data-testid="pause-button"
                                     />
                                 )}
+                                <BsArrowCounterclockwise
+                                    onClick={() => handleSkipBackward()}
+                                    className="skip-backward-button"
+                                    data-testid="skip-backward-button"
+                                />
+                                <BsArrowClockwise
+                                    onClick={() => handleSkipForward()}
+                                    className="skip-forward-button"
+                                    data-testid="skip-forward-button"
+                                />
+                                <BsFillSkipStartFill
+                                    onClick={() => handleRestart()}
+                                    className="restart-button"
+                                    data-testid="restart-button"
+                                />
                             </Col>
                             <Col className="text-end">
                                 <span data-testid="duration-bar-converted-runtime">

@@ -1,3 +1,6 @@
-.pause-and-play-button:hover {
+.pause-and-play-button:hover,
+.restart-button:hover,
+.skip-forward-button:hover,
+.skip-backward-button:hover {
     cursor: pointer;
 }
