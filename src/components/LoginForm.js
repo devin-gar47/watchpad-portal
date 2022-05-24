@@ -20,7 +20,7 @@ function LoginForm({ setIsLoading, setError, error }) {
                 { email, password }
             )
             dispatch(loginSuccess(data))
-            navigate('/profile/user-info')
+            navigate(`/${data.username}/user-info`)
         } catch (err) {
             if (!err.response) {
                 setError('Server currently is not running.')

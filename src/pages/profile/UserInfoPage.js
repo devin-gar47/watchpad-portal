@@ -32,11 +32,11 @@ const UserInfoPage = () => {
     return isLoading ? (
         <Loading message="Gathering data" />
     ) : (
-        <div style={{ margin: '10px' }}>
-            <h3>Username: {data.username}</h3>
-            <h3>Email: {data.email}</h3>
+        <div style={{ margin: '10px' }} data-testid="user-info-container">
+            <h3 data-testid="user-info-username">Username: {data.username}</h3>
+            <h3 data-testid="user-info-email">Email: {data.email}</h3>
             <FollowButton
-                followerUsername={userInformation.username}
+                followerUsername={userInformation?.username}
                 followeeUsername={data?.username}
             />
         </div>
