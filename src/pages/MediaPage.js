@@ -11,6 +11,9 @@ import '../css/Buttons.css'
 import '../css/Comments.css'
 import AddWatchlist from '../components/AddWatchlist'
 import DurationComments from '../components/DurationComments'
+import { Layout, Image, Row, Col, Space, Typography } from 'antd'
+import logo from '../static/watchpad_logo.png'
+import FiveStarMediaRating from '../components/FiveStarMediaRating'
 
 const base_url = 'https://image.tmdb.org/t/p/original/'
 function MediaPage() {
@@ -18,6 +21,8 @@ function MediaPage() {
 
     let params = useParams()
     const [runtime, setRuntime] = useState(0)
+    const { Sider, Content } = Layout
+    const { Title, Paragraph } = Typography
 
     // const[likesTotal, setLikesTotal] = useState(0)
     // const[dislikesTotal, setDislikesTotal] = useState(0)
@@ -57,76 +62,53 @@ function MediaPage() {
         console.log(response)
     }
 
-    // const getTotalLikes = async () => {
-    //     const response = await axios.get(
-    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-likes?mediaId=${params.movieId}`
-    //     )
-    //     setLikesTotal(response.data)
-    // }
-
-    // const getTotalDislikes = async () => {
-    //     const response = await axios.get(
-    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/count-dislikes?mediaId=${params.movieId}`
-    //     )
-    //     setDislikesTotal(response.data)
-    // }
-
-    // const userAlreadyRated = async () => {
-    //     const response = await axios.get(
-    //         `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-rating?mediaId=${params.movieId}&userId=${userInformation.id}`
-    //     )
-    //     setDislikesTotal(response.data)
-    // }
-
     useEffect(() => {
         saveMedia()
         getMovieInfo()
-        // getTotalLikes();
-        // getTotalDislikes();
     }, [])
 
     return (
-        <>
-            <div>
-                <h1 className="inline-block">
-                    <p className="media_title">
-                        {movie.title} :
-                        <small class="text-muted">{params.movieId}</small>
-                    </p>
-                </h1>
-            </div>
+        <Layout>
+            <Sider width={375} style={{ padding: '10px 10px' }}>
+                <Space direction="vertical" size="small">
+                    <Image
+                        key={movie.id}
+                        src={`${base_url}${movie.poster_path}`}
+                        alt={movie.title}
+                        rightMargin="10px"
+                        fallback={logo}
+                    />
 
-            <div
-                className="media_poster"
-                style={{
-                    display: 'flex',
-                    width: '100%',
-                }}
-            >
-                <img
-                    key={movie.id}
-                    height="400px"
-                    src={`${base_url}${movie.poster_path}`}
-                    alt={movie.title}
-                    rightMargin="10px"
-                />
+                    <Row wrap={false} align="middle">
+                        <Col span={8}>
+                            <LikeDislikes />
+                        </Col>
+                        <Col span={16}>
+                            <FiveStarMediaRating />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <AddWatchlist />
+                    </Row>
+                </Space>
+            </Sider>
 
-                <div className="media_description">{movie.overview}</div>
-                <div className="divider" style={{ width: '20px' }} />
+            <Content style={{ padding: '0 10px' }}>
+                <Title>
+                    {movie.title} :
+                    <small class="text-muted"> {params.movieId}</small>
+                </Title>
+                <Paragraph>{movie.overview}</Paragraph>
+                <CommentBox mediaId={movie.id} />
+
                 <div className="comment_display">
                     <CommentDisplay />
                 </div>
-            </div>
 
-            <div className="both_buttons">
-                <LikeDislikes />
-                <AddWatchlist />
-            </div>
-
-            <DurationBar runtime={runtime} />
-            <DurationComments mediaId={movie.id} />
-            <CommentBox mediaId={movie.id} />
-        </>
+                <DurationBar runtime={runtime} />
+                <DurationComments mediaId={movie.id} />
+            </Content>
+        </Layout>
     )
 }
 
