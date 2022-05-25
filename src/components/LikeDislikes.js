@@ -40,13 +40,10 @@ function LikeDislikes() {
             //if user likes already, response.data will be TRUE
             if (response.data.isLiked == true) {
                 updateLiked(1)
-                console.log('LOGGED IN USER LIKES THIS')
             } else {
                 updateDisliked(1)
-                console.log('LOGGED IN USER DISLIKES THIS')
             }
         } else {
-            console.log('USER HAS NOT LIKED OR DISLIKED THIS')
         }
     }
 

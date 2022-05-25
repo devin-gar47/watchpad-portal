@@ -9,7 +9,6 @@ function MenuItem({ item }) {
         <div
             className="menu_item"
             onClick={() => {
-                console.log('Clicked ' + item.link)
                 window.location.pathname = `${username}` + item.link
             }}
         >

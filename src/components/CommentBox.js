@@ -29,8 +29,6 @@ function CommentBox() {
         currentDate.getSeconds()
 
     var stringDate = date.toString()
-    console.log(typeof stringDate)
-    console.log(stringDate)
     const addComment = (event) => {
         event.preventDefault()
         const comment = {
