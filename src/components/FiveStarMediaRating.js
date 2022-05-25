@@ -19,7 +19,7 @@ function FiveStarMediaRating() {
         )
         console.log(response.data)
         if (response.data != null && response.data != 0) {
-            setAvgRating(response.data)
+            setAvgRating(Math.round(response.data * 100) / 100)
             updateDisplayAvg('AVG')
         }
     }
@@ -28,17 +28,13 @@ function FiveStarMediaRating() {
         const response = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-rating?mediaId=${params.movieId}&userId=${userInformation.id}`
         )
-        if (response.data !== null) {
-            updateRating(response.data)
-        } else {
-            console.log('USER HAS NOT RATED THIS')
+        if (response.data) {
+            updateRating(response.data.rating)
         }
     }
 
     const addNewRating = async (newRatingToSave) => {
-        console.log(newRatingToSave)
         updateRating(newRatingToSave)
-
         const response = await axios.post(
             `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/save-rating?mediaId=${params.movieId}&userId=${userInformation.id}&rating=${newRatingToSave}`
         )
@@ -58,6 +54,7 @@ function FiveStarMediaRating() {
                     allowClear={true}
                     defaultValue={2.5}
                     onChange={addNewRating}
+                    value={rating}
                 />
             </Col>
             <Col span={4}>

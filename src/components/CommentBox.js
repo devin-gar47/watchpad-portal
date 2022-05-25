@@ -44,10 +44,14 @@ function CommentBox() {
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
-                console.log('Comment Added!')
-                comment.user.username = userInformation.username
-                dispatch(myAddComment(comment))
+                console.log(response.data)
+                if (response.data) {
+                    dispatch(myAddComment(response.data))
+                } else {
+                    console.log('ERROR SAVING COMMENT')
+                }
             })
+
         // this will activate when submit button is clicked
         // setComments([...comments, newComment]) ...spread. pushes the new input into the array. keeps what is already inside array and appends new input
         event.preventDefault() // prevents the page refresh when Submit
