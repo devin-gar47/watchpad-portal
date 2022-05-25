@@ -1,11 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { setWatchlistEntries } from '../redux/reducers/watchlist/watchlistSlice'
+import {myAddWatchlistEntry} from '../redux/reducers/watchlist/watchlistSlice'
+
 
 function AddWatchlist() {
     let params = useParams()
+    const dispatch = useDispatch()
 
     const userInformation = useSelector((store) => store.userInformation)
     const [watchlist, setWatchlist] = useState([])
@@ -24,7 +28,15 @@ function AddWatchlist() {
 
             .then((response) => {
                 console.log(response)
+                if (response.data) {
+                    setWatchlistEntry(response.data)
+                    dispatch(myAddWatchlistEntry(response.data))
+                } else {
+                    console.log("ERROR SAVING ENTRY")
+                
+                }
             })
+
 
         setWatchlist([...watchlist, watchlistEntry])
         event.preventDefault()

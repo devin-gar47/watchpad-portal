@@ -1,6 +1,7 @@
 import React from 'react'
 import Row from '../../components/Row'
 import requests from '../../requests'
+import Watchlist from '../../components/Watchlist'
 
 const WatchListPage = () => {
     //const watchList = useSelector((store) => store.watchList)
@@ -24,6 +25,7 @@ const WatchListPage = () => {
         <div style={{ margin: '10px' }}>
             <div>
                 <Row title="WATCHLIST" fetchUrl={requests.fetchPopular} />
+                <Watchlist/>
             </div>
         </div>
     )
