@@ -17,7 +17,6 @@ function FiveStarMediaRating() {
         const response = await axios.get(
             `${process.env.REACT_APP_API_BASE_URL}/api/media-rating/get-average-rating-for-media?mediaId=${params.movieId}`
         )
-        console.log(response.data)
         if (response.data != null && response.data != 0) {
             setAvgRating(Math.round(response.data * 100) / 100)
             updateDisplayAvg('AVG')

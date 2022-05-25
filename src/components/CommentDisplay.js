@@ -42,7 +42,7 @@ export default CommentDisplay
             <h3 className="comments-title"> Reviews </h3>
             <div className="comments-container">
                 {mediaComments.map((c) => (
-                    <Comment key={c.id} comment={c} />
+                    <Comment key={c.comment_id} comment={c} />
                 ))}
             </div>
         </div>
