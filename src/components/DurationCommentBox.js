@@ -1,12 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import './CommentBox.css'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { myAddComment } from '../redux/reducers/comment/commentSlice'
+import {
+    toHoursAndMinutes,
+    toHoursMinutesAndSeconds,
+} from '../utils/time-utils'
 
-function CommentBox() {
+function DurationCommentBox({ currentPosition }) {
     let params = useParams()
     const dispatch = useDispatch()
 
@@ -29,27 +32,25 @@ function CommentBox() {
         currentDate.getSeconds()
 
     var stringDate = date.toString()
+    var stringDuration = toHoursMinutesAndSeconds(currentPosition).toString()
+
     const addComment = (event) => {
         event.preventDefault()
         const comment = {
             media: { id: params.movieId },
             user: { id: userInformation.id },
             comment_timestamp: stringDate,
-            comment_duration: null,
+            comment_duration: stringDuration,
             content: newComment,
             spoiler: true,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
-                console.log(response.data)
-                if (response.data) {
-                    dispatch(myAddComment(response.data))
-                } else {
-                    console.log('ERROR SAVING COMMENT')
-                }
+                console.log('Comment Added!')
+                comment.user.username = userInformation.username
+                dispatch(myAddComment(comment))
             })
-
         // this will activate when submit button is clicked
         // setComments([...comments, newComment]) ...spread. pushes the new input into the array. keeps what is already inside array and appends new input
         event.preventDefault() // prevents the page refresh when Submit
@@ -57,7 +58,7 @@ function CommentBox() {
     }
 
     return (
-        <div className="commentBox">
+        <div className="">
             <br />
 
             <div>
@@ -65,7 +66,7 @@ function CommentBox() {
                     <textarea
                         type="text"
                         style={{ width: '100%' }}
-                        placeholder="Write your review here..."
+                        placeholder="Write your comment here..."
                         value={newComment} //mapping state input(above) into input that is being filled in text area
                         onChange={(event) => setNewComment(event.target.value)} //every time user types, state gets updated above. target = text area field you type in
                     ></textarea>
@@ -76,7 +77,7 @@ function CommentBox() {
                         type="submit"
                         variant="primary"
                     >
-                        Post
+                        Post Comment
                     </Button>
                 </form>
             </div>
@@ -85,4 +86,4 @@ function CommentBox() {
     )
 }
 
-export default CommentBox
+export default DurationCommentBox
