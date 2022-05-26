@@ -20,19 +20,21 @@ const DurationComments = (mediaId) => {
 
     const dispatch = useDispatch()
 
-    const getComments = async () => {
-        try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
-            )
-            dispatch(setMediaComments(response.data))
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     useEffect(() => {
-        getComments()
+        function getCommentsApiCall() {
+            const getComments = async () => {
+                try {
+                    const response = await axios.get(
+                        `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
+                    )
+                    dispatch(setMediaComments(response.data))
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+            getComments()
+        }
+        getCommentsApiCall()
     }, [])
 
     const [likes, setLikes] = useState(0)

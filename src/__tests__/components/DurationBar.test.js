@@ -7,6 +7,9 @@ import { createMemoryHistory } from 'history'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from '../../redux/reducers'
+import axios from 'axios'
+
+jest.mock('axios')
 
 const myStore = configureStore({
     reducer: rootReducer,
@@ -32,6 +35,9 @@ beforeEach(() => {
 it('should trigger onChange event for slider and render correct position', () => {
     const setIsLoadingMock = jest.fn()
     const history = createMemoryHistory()
+    axios.get.mockResolvedValue({
+        response: { data: [{ user: { username: 'username' } }] },
+    })
     const { getByTestId } = render(
         <Provider store={myStore}>
             <Router location={history.location} navigator={history}>
@@ -53,6 +59,10 @@ it('should trigger onChange event for slider and render correct position', () =>
 it('should click play button', () => {
     const setIsLoadingMock = jest.fn()
     const history = createMemoryHistory()
+    axios.get.mockResolvedValue({
+        response: { data: [{ user: { username: 'username' } }] },
+    })
+
     const { getByTestId } = render(
         <Provider store={myStore}>
             <Router location={history.location} navigator={history}>
@@ -68,6 +78,10 @@ it('should click play button', () => {
 it('should click pause button', () => {
     const setIsLoadingMock = jest.fn()
     const history = createMemoryHistory()
+    axios.get.mockResolvedValue({
+        response: { data: [{ user: { username: 'username' } }] },
+    })
+
     const { getByTestId } = render(
         <Provider store={myStore}>
             <Router location={history.location} navigator={history}>
@@ -86,6 +100,10 @@ it('should click pause button', () => {
 it('should reset current position to zero since current position is greater than runtime in seconds', () => {
     const setIsLoadingMock = jest.fn()
     const history = createMemoryHistory()
+    axios.get.mockResolvedValue({
+        response: { data: [{ user: { username: 'username' } }] },
+    })
+
     const { getByTestId } = render(
         <Provider store={myStore}>
             <Router location={history.location} navigator={history}>
