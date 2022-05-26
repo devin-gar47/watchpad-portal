@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Form, Row } from 'react-bootstrap'
+import { Container, Col, Form, Row } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 import {
     BsPlayFill,
     BsFillPauseFill,
@@ -12,8 +13,12 @@ import {
     toHoursMinutesAndSeconds,
 } from '../utils/time-utils'
 import '../css/DurationBar.css'
+import DurationComments from '../components/DurationComments'
+import DurationCommentBox from '../components/DurationCommentBox'
 
 function DurationBar({ runtime }) {
+    let params = useParams()
+
     const [currentPosition, setCurrentPosition] = useState(0)
     const [convertedPosition, setConvertedPosition] = useState('00:00:00')
     const [isPaused, setIsPaused] = useState(true)
@@ -67,63 +72,75 @@ function DurationBar({ runtime }) {
     }, [currentPosition])
 
     return (
-        <Row className="justify-content-center no-gutters">
-            <Col sm={8}>
+        <div>
+            <Row className="justify-content-center no-gutters">
+                <Col sm={8}>
+                    <Row>
+                        <Col>
+                            <Form.Range
+                                value={currentPosition}
+                                min={0}
+                                max={runtimeInSeconds}
+                                onChange={(e) => changePosition(e)}
+                                data-testid="duration-bar-slider"
+                            />
+                            <Row>
+                                <Col className="text-start">
+                                    <span data-testid="duration-bar-converted-position">
+                                        {convertedPosition}
+                                    </span>
+                                </Col>
+                                <Col className="text-center">
+                                    {isPaused ? (
+                                        <BsPlayFill
+                                            onClick={() =>
+                                                handlePauseAndStart()
+                                            }
+                                            className="pause-and-play-button"
+                                            data-testid="play-button"
+                                        />
+                                    ) : (
+                                        <BsFillPauseFill
+                                            onClick={() =>
+                                                handlePauseAndStart()
+                                            }
+                                            className="pause-and-play-button"
+                                            data-testid="pause-button"
+                                        />
+                                    )}
+                                    <BsArrowCounterclockwise
+                                        onClick={() => handleSkipBackward()}
+                                        className="skip-backward-button"
+                                        data-testid="skip-backward-button"
+                                    />
+                                    <BsArrowClockwise
+                                        onClick={() => handleSkipForward()}
+                                        className="skip-forward-button"
+                                        data-testid="skip-forward-button"
+                                    />
+                                    <BsFillSkipStartFill
+                                        onClick={() => handleRestart()}
+                                        className="restart-button"
+                                        data-testid="restart-button"
+                                    />
+                                </Col>
+                                <Col className="text-end">
+                                    <span data-testid="duration-bar-converted-runtime">
+                                        {toHoursAndMinutes(runtime)}
+                                    </span>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Container>
                 <Row>
-                    <Col>
-                        <Form.Range
-                            value={currentPosition}
-                            min={0}
-                            max={runtimeInSeconds}
-                            onChange={(e) => changePosition(e)}
-                            data-testid="duration-bar-slider"
-                        />
-                        <Row>
-                            <Col className="text-start">
-                                <span data-testid="duration-bar-converted-position">
-                                    {convertedPosition}
-                                </span>
-                            </Col>
-                            <Col className="text-center">
-                                {isPaused ? (
-                                    <BsPlayFill
-                                        onClick={() => handlePauseAndStart()}
-                                        className="pause-and-play-button"
-                                        data-testid="play-button"
-                                    />
-                                ) : (
-                                    <BsFillPauseFill
-                                        onClick={() => handlePauseAndStart()}
-                                        className="pause-and-play-button"
-                                        data-testid="pause-button"
-                                    />
-                                )}
-                                <BsArrowCounterclockwise
-                                    onClick={() => handleSkipBackward()}
-                                    className="skip-backward-button"
-                                    data-testid="skip-backward-button"
-                                />
-                                <BsArrowClockwise
-                                    onClick={() => handleSkipForward()}
-                                    className="skip-forward-button"
-                                    data-testid="skip-forward-button"
-                                />
-                                <BsFillSkipStartFill
-                                    onClick={() => handleRestart()}
-                                    className="restart-button"
-                                    data-testid="restart-button"
-                                />
-                            </Col>
-                            <Col className="text-end">
-                                <span data-testid="duration-bar-converted-runtime">
-                                    {toHoursAndMinutes(runtime)}
-                                </span>
-                            </Col>
-                        </Row>
-                    </Col>
+                    <DurationComments mediaId={params.movieId} />
+                    <DurationCommentBox currentPosition={currentPosition} />
                 </Row>
-            </Col>
-        </Row>
+            </Container>
+        </div>
     )
 }
 

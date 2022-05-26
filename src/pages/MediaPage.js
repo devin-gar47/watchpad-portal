@@ -106,7 +106,6 @@ function MediaPage() {
                 </div>
 
                 <DurationBar runtime={runtime} />
-                <DurationComments mediaId={movie.id} />
             </Content>
         </Layout>
     )

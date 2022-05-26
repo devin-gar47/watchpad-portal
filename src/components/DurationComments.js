@@ -2,6 +2,8 @@ import React, { createElement, useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setMediaComments } from '../redux/reducers/comment/commentSlice'
 import { Comment, Tooltip, List } from 'antd'
 import moment from 'moment'
 import {
@@ -14,19 +16,25 @@ import {
 const DurationComments = (mediaId) => {
     let params = useParams()
     const [comment, setComment] = useState([])
+    const mediaComments = useSelector((store) => store.mediaComments)
 
-    const getComments = async () => {
-        const response = await axios.get(
-            `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-comments-by-media?mediaId=${params.movieId}`
-        )
-        console.log(response.data)
-        console.log(response.data.length)
-
-        setComment(response.data)
-    }
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getComments()
+        function getCommentsApiCall() {
+            const getComments = async () => {
+                try {
+                    const response = await axios.get(
+                        `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
+                    )
+                    dispatch(setMediaComments(response.data))
+                } catch (e) {
+                    console.log(e)
+                }
+            }
+            getComments()
+        }
+        getCommentsApiCall()
     }, [])
 
     const [likes, setLikes] = useState(0)
@@ -65,9 +73,9 @@ const DurationComments = (mediaId) => {
     return (
         <List
             className="comment-list"
-            header={`${comment.length} replies`}
+            header={`${mediaComments.length} replies`}
             itemLayout="horizontal"
-            dataSource={comment}
+            dataSource={mediaComments}
             renderItem={(item) => (
                 <li>
                     <Comment
