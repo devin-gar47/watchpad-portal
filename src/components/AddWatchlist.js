@@ -3,9 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { setWatchlistEntries } from '../redux/reducers/watchlist/watchlistSlice'
-import {myAddWatchlistEntry} from '../redux/reducers/watchlist/watchlistSlice'
-
 
 function AddWatchlist() {
     let params = useParams()
@@ -30,13 +27,10 @@ function AddWatchlist() {
                 console.log(response)
                 if (response.data) {
                     setWatchlistEntry(response.data)
-                    dispatch(myAddWatchlistEntry(response.data))
                 } else {
-                    console.log("ERROR SAVING ENTRY")
-                
+                    console.log('ERROR SAVING ENTRY')
                 }
             })
-
 
         setWatchlist([...watchlist, watchlistEntry])
         event.preventDefault()
