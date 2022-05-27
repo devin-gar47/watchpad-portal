@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { myAddComment } from '../redux/reducers/comment/commentSlice'
+import { myAddDurationComment } from '../redux/reducers/duration/durationSlice'
 import {
     toHoursAndMinutes,
     toHoursMinutesAndSeconds,
@@ -15,7 +15,7 @@ function DurationCommentBox({ currentPosition }) {
 
     const userInformation = useSelector((store) => store.userInformation)
 
-    const [comments, setComments] = useState([]) //state that stores the new inputs in an array
+    //const [comments, setComments] = useState([]) //state that stores the new inputs in an array
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
     var currentDate = new Date()
     var date =
@@ -40,16 +40,23 @@ function DurationCommentBox({ currentPosition }) {
             media: { id: params.movieId },
             user: { id: userInformation.id },
             comment_timestamp: stringDate,
-            comment_duration: stringDuration,
+            duration_timestamp: stringDuration,
             content: newComment,
             spoiler: true,
+            review: false,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
+                console.log(stringDuration)
+                console.log(response.data)
                 console.log('Comment Added!')
                 comment.user.username = userInformation.username
-                dispatch(myAddComment(comment))
+                if (response.data) {
+                    dispatch(myAddDurationComment(response.data))
+                } else {
+                    console.log('ERROR SAVING COMMENT')
+                }
             })
         // this will activate when submit button is clicked
         // setComments([...comments, newComment]) ...spread. pushes the new input into the array. keeps what is already inside array and appends new input

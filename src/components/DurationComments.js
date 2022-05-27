@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setMediaComments } from '../redux/reducers/comment/commentSlice'
+import { setDurationComments } from '../redux/reducers/duration/durationSlice'
 import { Comment, Tooltip, List } from 'antd'
 import moment from 'moment'
 import {
@@ -15,26 +15,24 @@ import {
 
 const DurationComments = (mediaId) => {
     let params = useParams()
-    const [comment, setComment] = useState([])
-    const mediaComments = useSelector((store) => store.mediaComments)
+    //const [comment, setComment] = useState([])
+    const durationComments = useSelector((store) => store.durationComments)
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        function getCommentsApiCall() {
-            const getComments = async () => {
-                try {
-                    const response = await axios.get(
-                        `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
-                    )
-                    dispatch(setMediaComments(response.data))
-                } catch (e) {
-                    console.log(e)
-                }
-            }
-            getComments()
+    const getComments = async () => {
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
+            )
+            console.log(response.data)
+            dispatch(setDurationComments(response.data))
+        } catch (e) {
+            console.log(e)
         }
-        getCommentsApiCall()
+    }
+    useEffect(() => {
+        getComments()
     }, [])
 
     const [likes, setLikes] = useState(0)
@@ -73,9 +71,9 @@ const DurationComments = (mediaId) => {
     return (
         <List
             className="comment-list"
-            header={`${mediaComments.length} replies`}
+            header={`${durationComments.length} replies`}
             itemLayout="horizontal"
-            dataSource={mediaComments}
+            dataSource={durationComments}
             renderItem={(item) => (
                 <li>
                     <Comment

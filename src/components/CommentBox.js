@@ -35,9 +35,10 @@ function CommentBox() {
             media: { id: params.movieId },
             user: { id: userInformation.id },
             comment_timestamp: stringDate,
-            comment_duration: null,
+            duration_timestamp: '',
             content: newComment,
             spoiler: true,
+            review: true,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)

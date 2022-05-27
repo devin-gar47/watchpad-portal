@@ -96,7 +96,7 @@ function MediaPage() {
             <Content style={{ padding: '0 10px' }}>
                 <Title>
                     {movie.title} :
-                    <small class="text-muted"> {params.movieId}</small>
+                    <small className="text-muted"> {params.movieId}</small>
                 </Title>
                 <Paragraph>{movie.overview}</Paragraph>
                 <CommentBox mediaId={movie.id} />
