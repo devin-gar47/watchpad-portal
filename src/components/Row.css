@@ -11,10 +11,6 @@
     overscroll-behavior-inline: contain;
     padding: 20px;
 }
-
-body {
-    padding-top: 70px;
-}
 /* 
 .row_posters::-webkit-scrollbar {
     display: none;
