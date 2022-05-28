@@ -10,6 +10,13 @@ function LoginPage() {
 
     return (
         <>
+            <style>
+                {`
+                    body {
+                        height: calc(100vh - 58px) !important;
+                    }
+                    `}
+            </style>
             <Row className="initial-page-height justify-content-center align-items-center bg-light bg-gradient">
                 <Col lg={6}>
                     <Row className="shadow p-5 rounded justify-content-center align-items-center">

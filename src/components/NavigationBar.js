@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, NavDropdown } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { logout } from '../redux/reducers/user/userSlice'
 
 function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
-
-    const [textInput, setTextInput] = React.useState('')
+    const [textInput, setTextInput] = useState('')
+    const dispatch = useDispatch()
     let navigate = useNavigate()
+
+    function handleLogout() {
+        dispatch(logout())
+        navigate('/')
+    }
 
     function handleKeyPress(event) {
         if (event.key === 'Enter') {
@@ -55,7 +62,15 @@ function NavigationBar() {
                             <Nav.Link href="/sign-up">Sign Up</Nav.Link>
                         </>
                     ) : (
-                        <span>Welcome, {userInformation.username}!</span>
+                        <NavDropdown
+                            title={`Welcome ${userInformation.username}`}
+                        >
+                            <NavDropdown.Item>
+                                <Button onClick={() => handleLogout()}>
+                                    Logout
+                                </Button>
+                            </NavDropdown.Item>
+                        </NavDropdown>
                     )}
                 </Nav>
             </Navbar.Collapse>

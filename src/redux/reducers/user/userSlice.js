@@ -10,9 +10,12 @@ export const userSlice = createSlice({
             newObj.isLoggedIn = true
             return Object.assign(newObj, action.payload)
         },
+        logout: () => {
+            return {}
+        },
     },
 })
 
-export const { loginSuccess } = userSlice.actions
+export const { loginSuccess, logout } = userSlice.actions
 
 export default userSlice.reducer
