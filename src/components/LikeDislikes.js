@@ -1,9 +1,14 @@
 import axios from 'axios'
-import React, { useState, useEffect } from 'react'
+import React, { createElement, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Button, Col, Row } from 'antd'
-import { DislikeFilled, LikeFilled } from '@ant-design/icons'
+import { Tooltip } from 'antd'
+import {
+    DislikeOutlined,
+    LikeOutlined,
+    DislikeFilled,
+    LikeFilled,
+} from '@ant-design/icons'
 
 function LikeDislikes() {
     const userInformation = useSelector((store) => store.userInformation)
@@ -16,6 +21,7 @@ function LikeDislikes() {
     //another state used to track if the like/dislike button is already pressed
     const [liked, updateLiked] = useState(0)
     const [disliked, updateDisliked] = useState(0)
+    const [action, setAction] = useState(null)
 
     const getTotalLikes = async () => {
         const response = await axios.get(
@@ -40,8 +46,10 @@ function LikeDislikes() {
             //if user likes already, response.data will be TRUE
             if (response.data.isLiked == true) {
                 updateLiked(1)
+                setAction('liked')
             } else {
                 updateDisliked(1)
+                setAction('disliked')
             }
         } else {
         }
@@ -92,15 +100,17 @@ function LikeDislikes() {
             updateLiked(0)
             setLikes(likes - 1)
             deleteUserRating()
+            setAction(null)
         } else {
             updateLiked(1)
             setLikes(likes + 1)
             if (disliked) {
                 updateDisliked(0)
                 setLikes(likes + 1)
-                setDislikes(disliked - 1)
+                setDislikes(dislikes - 1)
             }
             saveUserRating(true)
+            setAction('liked')
         }
     }
 
@@ -109,6 +119,7 @@ function LikeDislikes() {
             updateDisliked(0)
             setDislikes(dislikes - 1)
             deleteUserRating()
+            setAction(null)
         } else {
             updateDisliked(1)
             setDislikes(dislikes + 1)
@@ -118,30 +129,50 @@ function LikeDislikes() {
                 setLikes(likes - 1)
             }
             saveUserRating(false)
+            setAction('disliked')
         }
     }
 
     return (
-        <Row align="middle" justify="space-evenly">
-            <Col>
-                <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<LikeFilled />}
-                    onClick={clickedLike}
-                />
-            </Col>
-            <Col>{likes}</Col>
-            <Col>
-                <Button
-                    type="primary"
-                    shape="circle"
-                    icon={<DislikeFilled />}
-                    onClick={clickedDislike}
-                />
-            </Col>
-            <Col>{dislikes}</Col>
-        </Row>
+        // <Row align="middle" justify="space-evenly">
+        //     <Col>
+        //         <Button
+        //             type="primary"
+        //             shape="circle"
+        //             icon={<LikeFilled />}
+        //             onClick={clickedLike}
+        //         />
+        //     </Col>
+        //     <Col>{likes}</Col>
+        //     <Col>
+        //         <Button
+        //             type="primary"
+        //             shape="circle"
+        //             icon={<DislikeFilled />}
+        //             onClick={clickedDislike}
+        //         />
+        //     </Col>
+        //     <Col>{dislikes}</Col>
+        // </Row>
+
+        [
+            <Tooltip key="comment-basic-like" title="Like">
+                <span onClick={clickedLike}>
+                    {createElement(
+                        action === 'liked' ? LikeFilled : LikeOutlined
+                    )}
+                    <span className="comment-action">{likes}</span>
+                </span>
+            </Tooltip>,
+            <Tooltip key="comment-basic-dislike" title="Dislike">
+                <span onClick={clickedDislike}>
+                    {React.createElement(
+                        action === 'disliked' ? DislikeFilled : DislikeOutlined
+                    )}
+                    <span className="comment-action">{dislikes}</span>
+                </span>
+            </Tooltip>,
+        ]
     )
 }
 

@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDurationComments } from '../redux/reducers/duration/durationSlice'
+import LikeDislikeComment from './LikeDislikeComment'
+
 import { Comment, Tooltip, List } from 'antd'
 import moment from 'moment'
 import {
@@ -35,38 +37,38 @@ const DurationComments = (mediaId) => {
         getComments()
     }, [])
 
-    const [likes, setLikes] = useState(0)
-    const [dislikes, setDislikes] = useState(0)
-    const [action, setAction] = useState(null)
+    // const [likes, setLikes] = useState(0)
+    // const [dislikes, setDislikes] = useState(0)
+    // const [action, setAction] = useState(null)
 
-    const like = () => {
-        setLikes(1)
-        setDislikes(0)
-        setAction('liked')
-    }
+    // const like = () => {
+    //     setLikes(1)
+    //     setDislikes(0)
+    //     setAction('liked')
+    // }
 
-    const dislike = () => {
-        setLikes(0)
-        setDislikes(1)
-        setAction('disliked')
-    }
+    // const dislike = () => {
+    //     setLikes(0)
+    //     setDislikes(1)
+    //     setAction('disliked')
+    // }
 
-    const actions = [
-        <Tooltip key="comment-basic-like" title="Like">
-            <span onClick={like}>
-                {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-                <span className="comment-action">{likes}</span>
-            </span>
-        </Tooltip>,
-        <Tooltip key="comment-basic-dislike" title="Dislike">
-            <span onClick={dislike}>
-                {React.createElement(
-                    action === 'disliked' ? DislikeFilled : DislikeOutlined
-                )}
-                <span className="comment-action">{dislikes}</span>
-            </span>
-        </Tooltip>,
-    ]
+    // const actions = [
+    //     <Tooltip key="comment-basic-like" title="Like">
+    //         <span onClick={like}>
+    //             {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
+    //             <span className="comment-action">{likes}</span>
+    //         </span>
+    //     </Tooltip>,
+    //     <Tooltip key="comment-basic-dislike" title="Dislike">
+    //         <span onClick={dislike}>
+    //             {React.createElement(
+    //                 action === 'disliked' ? DislikeFilled : DislikeOutlined
+    //             )}
+    //             <span className="comment-action">{dislikes}</span>
+    //         </span>
+    //     </Tooltip>,
+    // ]
 
     return (
         <List
@@ -77,12 +79,18 @@ const DurationComments = (mediaId) => {
             renderItem={(item) => (
                 <li>
                     <Comment
-                        actions={actions}
+                        // actions={actions}
                         author={item.user.username}
                         avatar={item.user.photo}
                         content={item.content}
                         datetime={item.comment_timestamp}
                     />
+                    <div style={{ width: '110px', margin: '8px' }}>
+                        <LikeDislikeComment
+                            key={item.comment_id}
+                            commentId={item.comment_id}
+                        />
+                    </div>
                 </li>
             )}
         />
