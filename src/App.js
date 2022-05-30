@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import './App.css'
+import './App.scss'
 import Container from 'react-bootstrap/Container'
 import NavigationBar from './components/NavigationBar'
 import { Route, Routes } from 'react-router-dom'
@@ -16,6 +16,7 @@ import SearchResults from './pages/SearchResults'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { loginSuccess, logout } from './redux/reducers/user/userSlice'
+import './css/shared.scss'
 
 function App() {
     // const [theme, setTheme] = useLocalStorage('theme' ? 'dark' : 'light')

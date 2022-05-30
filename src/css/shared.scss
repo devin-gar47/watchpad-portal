@@ -1,0 +1,29 @@
+/* Color Theme Swatches in Hex */
+$color_mid_blue: #0367a6;
+$color_dark_blue: #011826;
+$color_cream: #d7d1d1;
+$color_light_blue: #b9d8f7;
+$color_vivid_blue: #0378a6;
+$color_gray: #d9d7d8;
+
+body {
+    background: rgb(8, 45, 68);
+    background: linear-gradient(
+        90deg,
+        rgba(8, 45, 68, 1) 0%,
+        rgba(1, 24, 38, 1) 50%,
+        rgba(2, 24, 38, 1) 100%
+    );
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+a {
+    color: $color_cream !important;
+}

@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { Button, Col, Row } from 'antd'
+import { Button } from 'antd'
+import { Col, Row } from 'react-bootstrap'
 import { DislikeFilled, LikeFilled } from '@ant-design/icons'
 
 function LikeDislikes() {
@@ -122,25 +123,25 @@ function LikeDislikes() {
     }
 
     return (
-        <Row align="middle" justify="space-evenly">
-            <Col>
+        <Row className="justify-content-between">
+            <Col lg={6}>
                 <Button
                     type="primary"
                     shape="circle"
                     icon={<LikeFilled />}
                     onClick={clickedLike}
                 />
+                {likes}
             </Col>
-            <Col>{likes}</Col>
-            <Col>
+            <Col lg={6}>
                 <Button
                     type="primary"
                     shape="circle"
                     icon={<DislikeFilled />}
                     onClick={clickedDislike}
                 />
+                {dislikes}
             </Col>
-            <Col>{dislikes}</Col>
         </Row>
     )
 }
