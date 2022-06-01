@@ -72,3 +72,23 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ---
 
 ### Docker
+
+```
+docker build -t watchpad/portal .
+```
+
+```
+docker run -d --name watchpad-portal -p 3000:3000 watchpad/portal
+```
+
+#### Stopping the container:
+
+```
+docker stop watchpad-portal
+```
+
+#### Removing the container
+
+```
+docker rm watchpad-portal
+```
