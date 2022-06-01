@@ -32,7 +32,7 @@
         "eject": "react-scripts eject",
         "format": "npx prettier --write ./src",
         "pre-push": "npx prettier --write ./src && npm test && git add . && git status",
-        "check-code-format": "npx prettier --check ."
+        "check-code-format": "npx prettier --check ./src"
     },
     "eslintConfig": {
         "extends": [
