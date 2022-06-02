@@ -2,6 +2,7 @@ import React from 'react'
 import Row from '../../components/Row'
 import requests from '../../requests'
 import Watchlist from '../../components/Watchlist'
+import MostCommentedMedia from '../../components/MostCommentedMedia'
 
 const WatchListPage = () => {
     //const watchList = useSelector((store) => store.watchList)
@@ -23,6 +24,9 @@ const WatchListPage = () => {
         */
 
         <div style={{ margin: '10px' }}>
+            <div>
+                <h1>WATCHLIST</h1>
+            </div>
             <div>
                 <Watchlist />
             </div>

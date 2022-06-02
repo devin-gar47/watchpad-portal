@@ -23,23 +23,21 @@ function Watchlist() {
             const { data } = await axios.get(
                 `${process.env.REACT_APP_API_BASE_URL}/api/watchlist/get-watchlist-media?userId=${userInformation.id}`
             )
-
-            // setMediaIdList(response.data)
-
+            //store the IDs in an array
             const mediaIdArr = data
             console.log('mediaIdArr = ', mediaIdArr)
 
             const mediaObjectsToGetPosterPath = mediaIdArr.map(
+                //map over the array of media IDs to get a media object for each ID from TMDB
                 async (mediaId) => {
                     const response = await axios.get(
                         `https://api.themoviedb.org/3/movie/${mediaId}?api_key=${process.env.REACT_APP_APIKEY}&language=en-US`
                     )
                     const { data } = response
-                    //console.log("POSTER PATH: ", data.poster_path)
                     const mediaObjArr = data
-                    const tmdbPosterLink = `${base_url}${data.poster_path}`
                     console.log('mediaObjArr = ', mediaObjArr)
-                    //console.log("POSTER LINK: ", tmdbPosterLink)
+
+                    //add the media objects to the media array
                     setMedia([...media, mediaObjArr])
                     return mediaObjArr
                 }
@@ -48,24 +46,10 @@ function Watchlist() {
             console.log('MEDIA HERE!!!!!!!!!!!, ', media)
 
             const posterPaths = await Promise.all(mediaObjectsToGetPosterPath)
+            //get the promised objects
             setMedia(posterPaths)
+            //store them in the array
             console.log('Media Objects = ', posterPaths)
-            //setMediaObjectToGetPosterPath(posterPaths)
-
-            /*
-            const posterPaths = mediaObjectsToGetPosterPath.map(async (mediaObject) => {
-                const response = await axios.get(
-                    `https://image.tmdb.org/t/p/original/${mediaObject.poster_path}`
-                )
-                const { data } = response
-                console.log("POSTER LINK: ", data)
-                const posterPathArr = data
-                console.log("posterPathArr = ", posterPathArr)
-                
-              })
-              */
-
-            // dispatch(setWatchlistEntries(response.data))
         } catch (e) {
             console.log(e)
         }
@@ -107,40 +91,5 @@ function Watchlist() {
         </div>
     )
 }
-
-/*
-   let params = useParams()
- 
-   const userInformation = useSelector((store) => store.userInformation)
- 
-   const [watchlist, setWatchlist] = useState([])
- 
-   const displayWatchlist = async () => {
-       const response = await axios.get(
-           `${process.env.REACT_APP_API_BASE_URL}/api/watchlist/get-watchlist?userId=${userInformation.id}`
-       )
-       console.log(
-           `${process.env.REACT_APP_API_BASE_URL}/api/watchlist/get-watchlist?userId=${userInformation.id}`
-       )
-       console.log(response.data)
-       setWatchlist(response.data)
-   }
- 
-   useEffect(() => {
-       displayWatchlist()
-   }, [])
- 
-   return (
-       <div>
-           <h1>Watchlist</h1>
-           <ul>
-               {watchlist.map((item) => (
-                   <li key={item.media.id}></li>
-               ))}
-           </ul>
-       </div>
-   )
-}
-*/
 
 export default Watchlist
