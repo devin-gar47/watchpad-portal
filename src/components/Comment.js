@@ -25,6 +25,7 @@ const Comment = ({ comment }) => {
             .then((response) => {
                 if (response.data) {
                     dispatch(myDeleteComment(response.data))
+                    console.log(response.data)
                 }
                 console.log(response)
             })
