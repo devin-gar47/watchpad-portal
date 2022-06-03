@@ -13,17 +13,16 @@ export const commentSlice = createSlice({
         },
 
         myDeleteComment: (state, action) => {
-            const arr = state.filter(commentSlice => commentSlice !== action.payload)
-            
+            const arr = state.filter(
+                (commentSlice) => commentSlice !== action.payload
+            )
+
             return arr
-                
-            
-
-        }
-
+        },
     },
 })
 
-export const { setMediaComments, myAddComment, myDeleteComment } = commentSlice.actions
+export const { setMediaComments, myAddComment, myDeleteComment } =
+    commentSlice.actions
 
 export default commentSlice.reducer
