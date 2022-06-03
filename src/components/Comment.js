@@ -5,9 +5,11 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import axios from 'axios'
 import { setMediaComments } from '../redux/reducers/comment/commentSlice'
+import { myDeleteComment } from '../redux/reducers/comment/commentSlice'
 
 const Comment = ({ comment }) => {
     const userInformation = useSelector((store) => store.userInformation)
+    const dispatch = useDispatch()
 
     const deleteComment = async (event) => {
         event.persist()
@@ -21,6 +23,9 @@ const Comment = ({ comment }) => {
                 }
             )
             .then((response) => {
+                if(response.data){
+                    dispatch(myDeleteComment(response.data))
+                }
                 console.log(response)
             })
     }
