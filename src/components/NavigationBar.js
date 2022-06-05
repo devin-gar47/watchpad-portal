@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, NavDropdown } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../redux/reducers/user/userSlice'
+import NavIcon from './NavIcon'
+import { AiFillHome } from 'react-icons/ai'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { BiMoviePlay } from 'react-icons/bi'
+import '../css/NavigationBar.scss'
 
 function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
+    const [showBackground, setShowBackground] = useState(false)
     const [textInput, setTextInput] = useState('')
     const dispatch = useDispatch()
     let navigate = useNavigate()
@@ -24,15 +30,32 @@ function NavigationBar() {
         }
     }
 
+    function showNavbarBackgroundColor() {
+        if (window.scrollY > 35) {
+            setShowBackground(true)
+        } else {
+            setShowBackground(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', showNavbarBackgroundColor)
+        return () =>
+            window.removeEventListener('scroll', showNavbarBackgroundColor)
+    }, [])
+
     return (
         <Navbar
-            bg="light"
             expand="lg"
-            className="px-2 flex-shrink-0 align-items-center"
+            className={`px-2 d-flex justify-content-between ${
+                showBackground && 'nav-background'
+            }`}
             fixed="top"
         >
-            <Navbar.Brand href="/">WatchPad</Navbar.Brand>
-            <div className="col-4">
+            <Navbar.Brand href="/" className="d-flex align-items-center">
+                WatchPad
+            </Navbar.Brand>
+            {/* <div className="col-4">
                 <div className="input-group">
                     <input
                         className="form-control border-secondary py-2"
@@ -42,38 +65,41 @@ function NavigationBar() {
                         onKeyPress={(e) => handleKeyPress(e)}
                     />
                 </div>
-            </div>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href={`/${userInformation.username}`}>
-                        Profile
-                    </Nav.Link>
-                    <Nav.Link href={`/${userInformation.username}/watchlist`}>
-                        Watchlist
-                    </Nav.Link>
-                </Nav>
-                <Nav className="align-items-center">
-                    {!Object.keys(userInformation).length ? (
-                        <>
-                            <Nav.Link href="/login">Login</Nav.Link>
-                            <span>/</span>
-                            <Nav.Link href="/sign-up">Sign Up</Nav.Link>
-                        </>
-                    ) : (
-                        <NavDropdown
-                            title={`Welcome ${userInformation.username}`}
-                        >
-                            <NavDropdown.Item>
-                                <Button onClick={() => handleLogout()}>
-                                    Logout
-                                </Button>
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                    )}
-                </Nav>
-            </Navbar.Collapse>
+            </div> */}
+            <Nav className="d-flex text-center">
+                <Nav.Link href="/">
+                    <NavIcon icon={<AiFillHome size={25} />} text="Home" />
+                </Nav.Link>
+                <Nav.Link href={`/${userInformation.username}`}>
+                    <NavIcon
+                        icon={<BsFillPersonFill size={25} />}
+                        text="Profile"
+                    />
+                </Nav.Link>
+                <Nav.Link href={`/${userInformation.username}/watchlist`}>
+                    <NavIcon
+                        icon={<BiMoviePlay size={25} />}
+                        text="Watchlist"
+                    />
+                </Nav.Link>
+            </Nav>
+            <Nav className="text-end">
+                {!Object.keys(userInformation).length ? (
+                    <>
+                        <Nav.Link href="/login">Login</Nav.Link>
+                        <span>/</span>
+                        <Nav.Link href="/sign-up">Sign Up</Nav.Link>
+                    </>
+                ) : (
+                    <NavDropdown title={`Welcome ${userInformation.username}`}>
+                        <NavDropdown.Item>
+                            <Button onClick={() => handleLogout()}>
+                                Logout
+                            </Button>
+                        </NavDropdown.Item>
+                    </NavDropdown>
+                )}
+            </Nav>
         </Navbar>
     )
 }

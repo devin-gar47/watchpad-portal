@@ -1,3 +1,5 @@
+@import './shared.scss';
+
 .comments {
     margin-top: 0.25px;
     width: 100%;
@@ -103,4 +105,14 @@
 
 .timeStamp {
     font-size: 9px;
+}
+
+.ant-list,
+.ant-list-split,
+.comment-list {
+    color: $color_cream;
+}
+
+.ant-comment-content-author-name {
+    color: $color_vivid_blue;
 }

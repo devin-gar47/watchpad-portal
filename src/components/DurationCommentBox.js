@@ -82,7 +82,7 @@ function DurationCommentBox({ currentPosition }) {
                     <Button
                         onClick={(e) => addComment(e)}
                         type="submit"
-                        variant="primary"
+                        className="yellow"
                     >
                         Post Comment
                     </Button>

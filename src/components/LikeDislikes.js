@@ -2,6 +2,8 @@ import axios from 'axios'
 import React, { createElement, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Button } from 'antd'
+import { Col, Row } from 'react-bootstrap'
 import { Tooltip } from 'antd'
 import {
     DislikeOutlined,
