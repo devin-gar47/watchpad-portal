@@ -1,6 +1,7 @@
 import React from 'react'
 import Row from '../components/Row'
 import requests from '../requests'
+import MostCommentedMedia from '../components/MostCommentedMedia'
 
 function HomePage() {
     return (
@@ -10,6 +11,8 @@ function HomePage() {
                 title="Recommended For You"
                 fetchUrl={requests.fetchTopRated}
             />
+
+            <MostCommentedMedia title="Most Commented Media" />
         </div>
     )
     /*

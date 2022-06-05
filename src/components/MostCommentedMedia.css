@@ -1,0 +1,24 @@
+.mcm-row {
+    /* grid-row-start: 20 px;
+    margin-left: 20px; */
+    padding: 10px;
+}
+
+.mcm-row_posters {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0px;
+}
+
+.mcm-row_poster {
+    object-fit: contain;
+    max-height: 300px;
+    margin-right: 10px;
+    transition: transform 450ms;
+}
+
+.mcm-row_poster:hover {
+    transform: scale(1.09);
+}

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { clone } from 'ramda'
 
 export const commentSlice = createSlice({
     name: 'Media Comments',
@@ -11,9 +12,18 @@ export const commentSlice = createSlice({
             const arr = [...state, action.payload]
             return arr
         },
+
+        myDeleteComment: (state, action) => {
+            const arr = state.filter(
+                (object) => object.comment_id !== action.payload.comment_id
+            )
+
+            return arr
+        },
     },
 })
 
-export const { setMediaComments, myAddComment } = commentSlice.actions
+export const { setMediaComments, myAddComment, myDeleteComment } =
+    commentSlice.actions
 
 export default commentSlice.reducer
