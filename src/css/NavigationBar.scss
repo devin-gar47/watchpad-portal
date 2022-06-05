@@ -8,3 +8,9 @@
     color: aquamarine !important;
     white-space: nowrap !important;
 }
+
+.navbar.nav-background {
+    background-color: $color_mid_blue !important;
+    // opacity: 50%;
+    box-shadow: 20px;
+}

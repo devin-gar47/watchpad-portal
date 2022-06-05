@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, NavDropdown } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../redux/reducers/user/userSlice'
-import WatchPadLogo from '../static/watchpad_logo.png'
 import NavIcon from './NavIcon'
 import { AiFillHome } from 'react-icons/ai'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { BiMoviePlay } from 'react-icons/bi'
+import '../css/NavigationBar.scss'
 
 function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
+    const [showBackground, setShowBackground] = useState(false)
     const [textInput, setTextInput] = useState('')
     const dispatch = useDispatch()
     let navigate = useNavigate()
@@ -29,10 +30,26 @@ function NavigationBar() {
         }
     }
 
+    function showNavbarBackgroundColor() {
+        if (window.scrollY > 35) {
+            setShowBackground(true)
+        } else {
+            setShowBackground(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', showNavbarBackgroundColor)
+        return () =>
+            window.removeEventListener('scroll', showNavbarBackgroundColor)
+    }, [])
+
     return (
         <Navbar
             expand="lg"
-            className="px-2 d-flex justify-content-between"
+            className={`px-2 d-flex justify-content-between ${
+                showBackground && 'nav-background'
+            }`}
             fixed="top"
         >
             <Navbar.Brand href="/" className="d-flex align-items-center">
