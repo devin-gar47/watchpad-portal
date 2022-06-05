@@ -3,6 +3,11 @@
 .media {
     margin-left: 5px;
 }
+
+.menu_item {
+    color: $color_cream !important;
+}
+
 .media_posters {
     display: flex;
     overflow-y: hidden;
@@ -39,4 +44,13 @@
 
 .ant-typography {
     color: $color_cream !important;
+}
+
+.movie-description {
+    max-height: 125px;
+    overflow-y: auto;
+}
+
+.review-text-box {
+    color: black;
 }

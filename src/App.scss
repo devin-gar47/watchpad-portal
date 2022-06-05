@@ -28,6 +28,7 @@
         rgba(1, 24, 38, 1) 50%,
         rgba(2, 24, 38, 1) 100%
     ) !important;
+    color: $color_cream;
 }
 
 .ant-layout-sider,
@@ -35,6 +36,20 @@
 .ant-layout-has-sider,
 .class {
     background-color: transparent !important;
+    color: $color_cream;
+}
+
+button.yellow {
+    background-color: $color_yellow !important;
+    color: $color_dark_blue;
+    border: 1px solid $color_mid_blue;
+}
+
+button.yellow:hover {
+    background-color: $color_dark_yellow !important;
+    color: black;
+    border: 1px solid $color_mid_blue;
+    transform: scale(1.08) perspective(1px);
 }
 
 .App {

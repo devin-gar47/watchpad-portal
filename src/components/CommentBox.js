@@ -11,8 +11,6 @@ function CommentBox() {
     const dispatch = useDispatch()
 
     const userInformation = useSelector((store) => store.userInformation)
-
-    const [comments, setComments] = useState([]) //state that stores the new inputs in an array
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
     var currentDate = new Date()
     var date =
@@ -29,8 +27,8 @@ function CommentBox() {
         currentDate.getSeconds()
 
     var stringDate = date.toString()
-    const addComment = (event) => {
-        event.preventDefault()
+    const addComment = (e) => {
+        e.preventDefault()
         const comment = {
             media: { id: params.movieId },
             user: { id: userInformation.id },
@@ -53,22 +51,23 @@ function CommentBox() {
 
         // this will activate when submit button is clicked
         // setComments([...comments, newComment]) ...spread. pushes the new input into the array. keeps what is already inside array and appends new input
-        event.preventDefault() // prevents the page refresh when Submit
+        e.preventDefault() // prevents the page refresh when Submit
         setNewComment('') //clears the text area back to empty after submitting
     }
 
     return (
-        <div className="commentBox">
+        <div>
             <br />
 
-            <div>
+            <div className="text-center">
                 <form>
                     <textarea
+                        className="review-text-box"
                         type="text"
                         style={{ width: '100%' }}
                         placeholder="Write your review here..."
                         value={newComment} //mapping state input(above) into input that is being filled in text area
-                        onChange={(event) => setNewComment(event.target.value)} //every time user types, state gets updated above. target = text area field you type in
+                        onChange={(e) => setNewComment(e.target.value)} //every time user types, state gets updated above. target = text area field you type in
                     ></textarea>
                     <br />
 
@@ -76,8 +75,9 @@ function CommentBox() {
                         onClick={(e) => addComment(e)}
                         type="submit"
                         variant="primary"
+                        className="yellow"
                     >
-                        Post
+                        Post Review
                     </Button>
                 </form>
             </div>

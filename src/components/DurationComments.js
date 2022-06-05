@@ -97,7 +97,7 @@ const DurationComments = (mediaId) => {
                         <Comment
                             // actions={actions}
                             author={item.user.username}
-                            avatar={item.user.photo}
+                            // avatar={item.user.photo}
                             content={item.content}
                             datetime={item.comment_timestamp}
                         />

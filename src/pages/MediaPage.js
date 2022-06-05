@@ -8,9 +8,17 @@ import LikeDislikes from '../components/LikeDislikes'
 import DurationBar from '../components/DurationBar'
 import CommentDisplay from '../components/CommentDisplay'
 import '../css/Buttons.css'
-import '../css/Comments.css'
+import '../css/Comments.scss'
 import AddWatchlist from '../components/AddWatchlist'
-import { Layout, Image, Row, Col, Space, Typography } from 'antd'
+import {
+    Layout,
+    Image,
+    Row as AntRow,
+    Col as AntCol,
+    Space,
+    Typography,
+} from 'antd'
+import { Col, Row } from 'react-bootstrap'
 import logo from '../static/watchpad_logo.png'
 import FiveStarMediaRating from '../components/FiveStarMediaRating'
 
@@ -70,6 +78,7 @@ function MediaPage() {
         <Layout>
             <Sider width={375} style={{ padding: '10px 10px' }}>
                 <Space direction="vertical" size="small">
+                    <h2 className="m-0">{movie.title}</h2>
                     <Image
                         key={movie.id}
                         src={`${base_url}${movie.poster_path}`}
@@ -78,31 +87,36 @@ function MediaPage() {
                         fallback={logo}
                     />
 
-                    <Row wrap={false} align="middle">
-                        <Col span={8}>
+                    <Paragraph className="movie-description">
+                        {movie.overview}
+                    </Paragraph>
+
+                    <AntRow wrap={false} align="middle">
+                        <AntCol span={8}>
                             <LikeDislikes />
-                        </Col>
-                        <Col span={16}>
+                        </AntCol>
+                        <AntCol span={16}>
                             <FiveStarMediaRating />
-                        </Col>
-                    </Row>
-                    <Row>
+                        </AntCol>
+                    </AntRow>
+                    <AntRow>
                         <AddWatchlist />
-                    </Row>
+                    </AntRow>
                 </Space>
             </Sider>
 
             <Content style={{ padding: '0 10px' }}>
-                <Title>
-                    {movie.title} :
-                    <small className="text-muted"> {params.movieId}</small>
-                </Title>
-                <Paragraph>{movie.overview}</Paragraph>
-                <CommentBox mediaId={movie.id} />
-
-                <div className="comment_display">
-                    <CommentDisplay />
-                </div>
+                <Row>
+                    <Col lg={6}>
+                        <CommentDisplay />
+                    </Col>
+                    <Col
+                        className="d-flex align-items-center justify-content-center"
+                        lg={6}
+                    >
+                        <h2>Reserved for live feed chat...</h2>
+                    </Col>
+                </Row>
 
                 <DurationBar runtime={runtime} />
             </Content>

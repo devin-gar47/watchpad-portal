@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../redux/reducers/user/userSlice'
 import WatchPadLogo from '../static/watchpad_logo.png'
+import NavIcon from './NavIcon'
+import { AiFillHome } from 'react-icons/ai'
+import { BsFillPersonFill } from 'react-icons/bs'
+import { BiMoviePlay } from 'react-icons/bi'
 
 function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
@@ -45,13 +49,21 @@ function NavigationBar() {
                     />
                 </div>
             </div> */}
-            <Nav className="text-center">
-                <Nav.Link href="/">Home</Nav.Link>
+            <Nav className="d-flex text-center">
+                <Nav.Link href="/">
+                    <NavIcon icon={<AiFillHome size={25} />} text="Home" />
+                </Nav.Link>
                 <Nav.Link href={`/${userInformation.username}`}>
-                    Profile
+                    <NavIcon
+                        icon={<BsFillPersonFill size={25} />}
+                        text="Profile"
+                    />
                 </Nav.Link>
                 <Nav.Link href={`/${userInformation.username}/watchlist`}>
-                    Watchlist
+                    <NavIcon
+                        icon={<BiMoviePlay size={25} />}
+                        text="Watchlist"
+                    />
                 </Nav.Link>
             </Nav>
             <Nav className="text-end">

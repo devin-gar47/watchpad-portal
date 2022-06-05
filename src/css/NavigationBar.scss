@@ -1,1 +1,10 @@
 @import './shared.scss';
+
+.nav-icon-container {
+    max-width: 10px !important;
+}
+
+.nav-icon-container small {
+    color: aquamarine !important;
+    white-space: nowrap !important;
+}

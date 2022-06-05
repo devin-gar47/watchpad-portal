@@ -1,8 +1,11 @@
 import React from 'react'
 import Menu from '../../components/Menu'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function ProfilePage() {
+    const navigate = useNavigate()
+    const userInformation = useSelector((store) => store.userInformation)
     const menuItems = [
         {
             label: 'USER INFO',
