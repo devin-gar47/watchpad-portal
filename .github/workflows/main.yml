@@ -35,3 +35,21 @@ jobs:
                   heroku_app_name: 'watchpad-portal'
                   heroku_email: 'devingar18@gmail.com'
                   usedocker: true
+    
+    deploy-to-s3:
+        needs: build
+        name: Deploy to s3
+        runs-on: ubuntu-latest
+        if: github.ref == 'refs/heads/main'
+
+        steps:
+            - uses: actions/checkout@v3
+            - uses: jakejarvis/s3-sync-action@master
+                with:
+                    args: --acl public-read --delete
+                env:
+                    AWS_S3_BUCKET: ${{ secrets.AWS_PRODUCTION_BUCKET_NAME }}
+                    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                    AWS_REGION: ${{ secrets.AWS_REGION }}
+                    # SOURCE_DIR: "build"
