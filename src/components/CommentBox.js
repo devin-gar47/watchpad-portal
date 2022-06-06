@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Popover, OverlayTrigger } from 'react-bootstrap'
 import './CommentBox.css'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { myAddComment } from '../redux/reducers/comment/commentSlice'
+import GIFModal from './GIFModal'
 
 function CommentBox() {
     let params = useParams()
@@ -12,6 +13,9 @@ function CommentBox() {
 
     const userInformation = useSelector((store) => store.userInformation)
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
+    const [modalShow, setModalShow] = useState(false)
+    const [gifURL, setgifURL] = useState('')
+
     var currentDate = new Date()
     var date =
         currentDate.getFullYear() +
@@ -37,6 +41,7 @@ function CommentBox() {
             content: newComment,
             spoiler: true,
             review: true,
+            gifURL: gifURL,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
@@ -44,6 +49,7 @@ function CommentBox() {
                 console.log(response.data)
                 if (response.data) {
                     dispatch(myAddComment(response.data))
+                    setgifURL('')
                 } else {
                     console.log('ERROR SAVING COMMENT')
                 }
@@ -58,6 +64,10 @@ function CommentBox() {
     return (
         <div>
             <br />
+
+            <img
+                src={`${gifURL}`} //shows the user's current chosen GIF, if any
+            />
 
             <div className="text-center">
                 <form>
@@ -79,6 +89,22 @@ function CommentBox() {
                     >
                         Post Review
                     </Button>
+
+                    <>
+                        <Button
+                            variant="primary"
+                            onClick={() => setModalShow(true)}
+                        >
+                            +GIF
+                        </Button>
+
+                        <GIFModal
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                            gifURL={gifURL}
+                            setgifURL={setgifURL}
+                        />
+                    </>
                 </form>
             </div>
             <br />
