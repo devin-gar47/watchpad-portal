@@ -74,6 +74,9 @@ const Comment = ({ comment }) => {
                         <ShowDeleteButton /> <ShowEditButton />
                     </div>
                 </div>
+                <img
+                    src={`${comment.gifURL}`} //shows the user's current chosen GIF, if any
+                />
                 <div className="comment-text">
                     {comment.content}
 

@@ -1,0 +1,20 @@
+.gifs {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gif {
+    padding: 2px 2px;
+}
+
+.gif:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.gifs-loading {
+    color: #b64152;
+}
