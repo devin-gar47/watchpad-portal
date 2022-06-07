@@ -10,7 +10,7 @@ import {
 import { Button, Alert } from 'antd'
 import axios from 'axios'
 import { setMediaComments } from '../redux/reducers/comment/commentSlice'
-import { myDeleteComment } from '../redux/reducers/comment/commentSlice'
+import { myDeleteComment, myEditComment } from '../redux/reducers/comment/commentSlice'
 
 const Comment = ({ comment }) => {
     const userInformation = useSelector((store) => store.userInformation)
@@ -56,6 +56,10 @@ const Comment = ({ comment }) => {
                 editedComment
             )
             .then((response) => {
+                if (response.data) {
+                    dispatch(myEditComment(response.data))
+                    console.log(response.data)
+                }
                 console.log(response.data)
                 comment = editedComment
             })
