@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Button, NavDropdown } from 'react-bootstrap'
+import { Button, Form, NavDropdown } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../redux/reducers/user/userSlice'
 import NavIcon from './NavIcon'
-import { AiFillHome } from 'react-icons/ai'
+import { AiFillHome, AiOutlineSearch } from 'react-icons/ai'
 import { BsFillPersonFill } from 'react-icons/bs'
 import { BiMoviePlay } from 'react-icons/bi'
 import '../css/NavigationBar.scss'
@@ -15,6 +15,7 @@ function NavigationBar() {
     const userInformation = useSelector((store) => store.userInformation)
     const [showBackground, setShowBackground] = useState(false)
     const [textInput, setTextInput] = useState('')
+    const [error, setError] = useState(false)
     const dispatch = useDispatch()
     let navigate = useNavigate()
 
@@ -23,11 +24,13 @@ function NavigationBar() {
         navigate('/')
     }
 
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') {
-            let path = `/search/${textInput}`
-            navigate(path)
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (!textInput) {
+            setError(true)
+            return
         }
+        navigate(`/search/${textInput}`)
     }
 
     function showNavbarBackgroundColor() {
@@ -52,20 +55,40 @@ function NavigationBar() {
             }`}
             fixed="top"
         >
-            <Navbar.Brand href="/" className="d-flex align-items-center">
-                WatchPad
-            </Navbar.Brand>
-            {/* <div className="col-4">
-                <div className="input-group">
-                    <input
+            <Navbar.Brand className="d-flex align-items-center">
+                <p
+                    className="m-0 me-3"
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => navigate('/')}
+                >
+                    WatchPad
+                </p>
+                <Form
+                    onSubmit={(e) => handleSubmit(e)}
+                    style={{ position: 'relative' }}
+                >
+                    <Form.Control
+                        type="text"
+                        placeholder="search"
+                        onChange={(e) => {
+                            setError(false)
+                            setTextInput(e.target.value)
+                        }}
+                        className="search-bar"
+                    />
+                    <AiOutlineSearch className="search-icon" />
+                    <Form.Text hidden={!error} className="search-error-text">
+                        Search field cannot be blank!
+                    </Form.Text>
+                </Form>
+                {/* <input
                         className="form-control border-secondary py-2"
                         type="search"
                         placeholder="search"
                         onChange={(e) => setTextInput(e.target.value)}
                         onKeyPress={(e) => handleKeyPress(e)}
-                    />
-                </div>
-            </div> */}
+                    /> */}
+            </Navbar.Brand>
             <Nav className="d-flex text-center">
                 <Nav.Link href="/">
                     <NavIcon icon={<AiFillHome size={25} />} text="Home" />
