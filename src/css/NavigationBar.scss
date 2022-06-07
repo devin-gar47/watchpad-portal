@@ -14,3 +14,36 @@
     // opacity: 50%;
     box-shadow: 20px;
 }
+
+input.search-bar {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid $color_yellow;
+    border-radius: 0;
+    color: white;
+    outline: none !important;
+    -webkit-appearance: none;
+    box-shadow: none !important;
+}
+
+input.search-bar:focus,
+input:focus {
+    background-color: transparent;
+    color: white;
+    box-shadow: none;
+}
+
+.search-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    height: 40px;
+    color: white;
+}
+
+.search-error-text {
+    position: absolute;
+    top: 35px;
+    font-size: 14px !important;
+}
