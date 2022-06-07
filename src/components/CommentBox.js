@@ -39,7 +39,7 @@ function CommentBox() {
             comment_timestamp: stringDate,
             duration_timestamp: '',
             content: newComment,
-            spoiler: true,
+            spoiler: false,
             review: true,
             gifURL: gifURL,
         }
