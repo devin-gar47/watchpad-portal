@@ -35,7 +35,10 @@ function CommentBox() {
         e.preventDefault()
         const comment = {
             media: { id: params.movieId },
-            user: { id: userInformation.id, username: userInformation.username},
+            user: {
+                id: userInformation.id,
+                username: userInformation.username,
+            },
             comment_timestamp: stringDate,
             duration_timestamp: '',
             content: newComment,
@@ -46,7 +49,7 @@ function CommentBox() {
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
-                console.log("RESPONSE")
+                console.log('RESPONSE')
                 console.log(response.data)
                 if (response.data) {
                     dispatch(myAddComment(response.data))

@@ -23,8 +23,7 @@ export const commentSlice = createSlice({
 
         myEditComment: (state, action) => {
             const index = state.findIndex(
-                (object => object.comment_id == action.payload.comment_id)
-            
+                (object) => object.comment_id == action.payload.comment_id
             )
             state[index] = action.payload
             return state
@@ -32,7 +31,11 @@ export const commentSlice = createSlice({
     },
 })
 
-export const { setMediaComments, myAddComment, myDeleteComment, myEditComment } =
-    commentSlice.actions
+export const {
+    setMediaComments,
+    myAddComment,
+    myDeleteComment,
+    myEditComment,
+} = commentSlice.actions
 
 export default commentSlice.reducer
