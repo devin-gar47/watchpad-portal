@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setMediaComments } from '../redux/reducers/comment/commentSlice'
 import CommentBox from './CommentBox'
 
-
 const CommentDisplay = (mediaId) => {
     let params = useParams()
     const [comment, setComment] = useState([])

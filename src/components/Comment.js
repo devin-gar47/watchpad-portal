@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import LikeDislikeComment from './LikeDislikeComment'
 import { useDispatch, useSelector } from 'react-redux'
-import { DeleteOutlined, EditOutlined, SoundTwoTone, SoundFilled } from '@ant-design/icons'
+import {
+    DeleteOutlined,
+    EditOutlined,
+    SoundTwoTone,
+    SoundFilled,
+} from '@ant-design/icons'
 import { Button, Alert } from 'antd'
 import axios from 'axios'
 import { setMediaComments } from '../redux/reducers/comment/commentSlice'
@@ -32,32 +37,29 @@ const Comment = ({ comment }) => {
             })
     }
 
-    const editSpoiler = async (event) => { 
-
+    const editSpoiler = async (event) => {
         const editedComment = {
-            media: { id: comment.media.id},
+            media: { id: comment.media.id },
             user: { id: comment.user.id },
             comment_timestamp: comment.comment_timestamp,
             duration_timestamp: '',
             content: comment.content,
-            spoiler: (!comment.spoiler),
+            spoiler: !comment.spoiler,
             review: true,
             gifURL: comment.gifURL,
         }
 
         event.persist()
         axios
-        .put(
-            `${process.env.REACT_APP_API_BASE_URL}/api/comments/${comment.comment_id}`, editedComment,)
+            .put(
+                `${process.env.REACT_APP_API_BASE_URL}/api/comments/${comment.comment_id}`,
+                editedComment
+            )
             .then((response) => {
                 console.log(response.data)
                 comment = editedComment
-
             })
-
-            
     }
-
 
     function ShowDeleteButton() {
         if (comment.user.id == userInformation.id) {
@@ -87,67 +89,56 @@ const Comment = ({ comment }) => {
     }
 
     function ShowSpoilerButton() {
-
-        if(comment.spoiler == false) {
+        if (comment.spoiler == false) {
             return (
-                
                 <Button
-                    onClick={(e) => editSpoiler(e) }
+                    onClick={(e) => editSpoiler(e)}
                     type="link"
                     shape="circle"
-                    icon={<SoundTwoTone twoToneColor="#F58216"  />}
+                    icon={<SoundTwoTone twoToneColor="#F58216" />}
                 />
             )
-        }
-        else {
+        } else {
             return (
                 <Button
-                    onClick={(e) => editSpoiler(e) }
+                    onClick={(e) => editSpoiler(e)}
                     type="link"
                     shape="circle"
                     icon={<SoundFilled />}
                 />
             )
-        }   
-       
+        }
     }
 
     useEffect(() => {
         comment.spoiler && setIsSpoilerGuardOn(true)
     }, [])
 
-    function ShowSpoilerGuard () {
-        if(comment.spoiler == true){
+    function ShowSpoilerGuard() {
+        if (comment.spoiler == true) {
             setIsSpoilerGuardOn(true)
-        return(    
-        
-            <Alert
-            message="Spoiler Warning!"
-            showIcon
-            description="This Content contains a spoiler"
-            type="warning"
-            closable
-            closeText = "View anyway"
-            onClose={()=> setIsSpoilerGuardOn(false)}
-          />
-        )
+            return (
+                <Alert
+                    message="Spoiler Warning!"
+                    showIcon
+                    description="This Content contains a spoiler"
+                    type="warning"
+                    closable
+                    closeText="View anyway"
+                    onClose={() => setIsSpoilerGuardOn(false)}
+                />
+            )
         }
-        setIsSpoilerGuardOn(false) 
+        setIsSpoilerGuardOn(false)
         return displayComment()
     }
-    
-    
-    function displayComment(){
 
+    function displayComment() {
         return <div>{comment.content}</div>
-      
     }
 
-
-
     return (
-
-            <div className="comment">
+        <div className="comment">
             <div className="comment-image-container">
                 <img src="/user-icon.png" alt="user icon" />
             </div>
@@ -159,30 +150,31 @@ const Comment = ({ comment }) => {
                     </div>
                     <div className="timeStamp">
                         {comment.comment_timestamp}
-                        <ShowDeleteButton /> <ShowEditButton /> <ShowSpoilerButton />
+                        <ShowDeleteButton /> <ShowEditButton />{' '}
+                        <ShowSpoilerButton />
                     </div>
                 </div>
                 <img
                     src={`${comment.gifURL}`} //shows the user's current chosen GIF, if any
                 />
                 <div className="comment-text">
+                    {isSpoilerGuardOn ? (
+                        <Alert
+                            message="Spoiler Warning!"
+                            showIcon
+                            description="This Content contains a spoiler"
+                            type="warning"
+                            closable
+                            closeText="View anyway"
+                            onClose={() => {
+                                setIsSpoilerGuardOn(false)
+                            }}
+                        />
+                    ) : (
+                        <>{comment.content}</>
+                    )}
 
-                    {isSpoilerGuardOn ? (    
-        
-        <Alert
-        message="Spoiler Warning!"
-        showIcon
-        description="This Content contains a spoiler"
-        type="warning"
-        closable
-        closeText = "View anyway"
-        onClose={()=> {setIsSpoilerGuardOn(false)}}
-      />
-    ) : (<>{comment.content}</>)}
-
-                 {/* <ShowSpoilerGuard />  */}
-
-                   
+                    {/* <ShowSpoilerGuard />  */}
 
                     <div style={{ width: '110px', margin: '8px' }}>
                         <LikeDislikeComment
@@ -193,13 +185,6 @@ const Comment = ({ comment }) => {
                 </div>
             </div>
         </div>
-
-        
-
-
-        
-
-       
     )
 }
 
