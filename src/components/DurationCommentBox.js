@@ -41,7 +41,10 @@ function DurationCommentBox({ currentPosition }) {
         event.preventDefault()
         const comment = {
             media: { id: params.movieId },
-            user: { id: userInformation.id, username: userInformation.username},
+            user: {
+                id: userInformation.id,
+                username: userInformation.username,
+            },
             comment_timestamp: stringDate,
             duration_timestamp: intDuration,
             content: newComment,
