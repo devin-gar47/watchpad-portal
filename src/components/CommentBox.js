@@ -65,13 +65,21 @@ function CommentBox() {
         setNewComment('') //clears the text area back to empty after submitting
     }
 
+    const renderChosenReviewGIF = () => {
+        if(gifURL.length>0){
+            return (
+                <img
+                src={`${gifURL}`} //shows the user's current chosen GIF, if any
+            />
+        )
+        }
+            }
+
     return (
         <div>
             <br />
 
-            <img
-                src={`${gifURL}`} //shows the user's current chosen GIF, if any
-            />
+{renderChosenReviewGIF()}
 
             <div className="text-center">
                 <form>
