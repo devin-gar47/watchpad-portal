@@ -40,7 +40,7 @@ function CommentBox() {
                 username: userInformation.username,
             },
             comment_timestamp: stringDate,
-            duration_timestamp: '',
+            duration_timestamp: 0,
             content: newComment,
             spoiler: false,
             review: true,

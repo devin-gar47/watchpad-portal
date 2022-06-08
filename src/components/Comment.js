@@ -45,7 +45,7 @@ const Comment = ({ comment }) => {
             media: { id: comment.media.id },
             user: { id: comment.user.id },
             comment_timestamp: comment.comment_timestamp,
-            duration_timestamp: '',
+            duration_timestamp: 0,
             content: comment.content,
             spoiler: !comment.spoiler,
             review: true,
