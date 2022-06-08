@@ -163,7 +163,7 @@ const Comment = ({ comment }) => {
             <div className="comment-right-part">
                 <div className="comment-content">
                     <div className="comment-author">
-                        {comment.user.username}
+                        <a href = {`/${comment.user.username}/user-info`}>{comment.user.username}</a>
                     </div>
                     <div className="timeStamp">
                         {comment.comment_timestamp}

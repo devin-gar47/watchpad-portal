@@ -11,10 +11,16 @@ export const realTimeSlice = createSlice({
             const arr = [...state, action.payload]
             return arr
         },
+
+        myAddNewRealTimeComment: (state, action) => {
+            const arr = [...state, action.payload]
+            return arr.sort((a,b) => (parseInt(String(a.duration_timestamp))) < (parseInt(String(b.duration_timestamp))) ? 1:-1)
     },
+}
 })
 
-export const { setRealTimeComments, myAddRealTimeComment } =
+
+export const { setRealTimeComments, myAddRealTimeComment, myAddNewRealTimeComment } =
     realTimeSlice.actions
 
 export default realTimeSlice.reducer
