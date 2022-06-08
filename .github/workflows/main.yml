@@ -34,4 +34,4 @@ jobs:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                   heroku_app_name: 'watchpad-portal'
                   heroku_email: 'devingar18@gmail.com'
-                #   usedocker: true
+                  usedocker: true
