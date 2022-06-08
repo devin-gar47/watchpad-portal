@@ -145,7 +145,7 @@ const Comment = ({ comment }) => {
     }
 
     const renderDurationCommentGIF = (reviewGIFURL) => {
-        if (reviewGIFURL.length > 0) {
+        if (reviewGIFURL?.length > 0) {
             return (
                 <img
                     src={`${reviewGIFURL}`} //shows the user's current chosen GIF, if any

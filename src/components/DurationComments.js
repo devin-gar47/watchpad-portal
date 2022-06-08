@@ -84,7 +84,7 @@ const DurationComments = (mediaId) => {
     // ]
 
     const renderDurationCommentGIF = (commentGIFURL) => {
-        if (commentGIFURL.length > 0) {
+        if (commentGIFURL?.length > 0) {
             return (
                 <img
                     src={`${commentGIFURL}`} //shows the user's current chosen GIF, if any
