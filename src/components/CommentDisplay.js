@@ -17,71 +17,60 @@ const CommentDisplay = (mediaId) => {
     const mediaComments = useSelector((store) => store.mediaComments)
     const userInformation = useSelector((store) => store.userInformation)
 
-
     const dispatch = useDispatch()
 
     const getComments = async (checked) => {
-        if(popularToggle == false && followerToggle == false){
-            try{
+        if (popularToggle == false && followerToggle == false) {
+            try {
                 const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-reviews-by-media?mediaId=${params.movieId}`   
+                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-reviews-by-media?mediaId=${params.movieId}`
                 )
                 dispatch(setMediaComments(response.data))
-            }
-            catch(e){
+            } catch (e) {
                 console.log(e)
             }
-            }
-        else if (popularToggle == true && followerToggle == false){
-            try{
+        } else if (popularToggle == true && followerToggle == false) {
+            try {
                 const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-most-liked?mediaId=${params.movieId}`   
+                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-most-liked?mediaId=${params.movieId}`
                 )
                 dispatch(setMediaComments(response.data))
+            } catch (e) {
+                console.log(e)
             }
-            catch(e){
+        } else {
+            try {
+                console.log(userInformation.username)
+                const response = await axios.get(
+                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-reviews-by-follower?mediaId=${params.movieId}&username=${userInformation.username}`
+                )
+                dispatch(setMediaComments(response.data))
+            } catch (e) {
                 console.log(e)
             }
         }
-        else{
-            try{
-                console.log(userInformation.username)
-                const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-reviews-by-follower?mediaId=${params.movieId}&username=${userInformation.username}`   
-                )
-                dispatch(setMediaComments(response.data))
-            }
-            catch(e){
-                console.log(e)
-            }
-        }  
     }
 
     useEffect(() => {
         getComments()
-    }, [popularToggle,followerToggle])
+    }, [popularToggle, followerToggle])
 
-    const onPopularChange = (checked) =>{
+    const onPopularChange = (checked) => {
         setPopularToggle(checked)
-        
     }
 
-     const onFollowerChange = (checked) =>{
+    const onFollowerChange = (checked) => {
         setFollowerToggle(checked)
-        
     }
 
     return (
         <div className="comments">
             <h8> Most Popular</h8>
-            {!followerToggle && (<Switch onChange={onPopularChange} />)}
-            {followerToggle && (<Switch disabled onChange={onPopularChange} />)}
+            {!followerToggle && <Switch onChange={onPopularChange} />}
+            {followerToggle && <Switch disabled onChange={onPopularChange} />}
             <h8>By Followers</h8>
-            {!popularToggle &&
-            (<Switch onChange={onFollowerChange}/>)}
-            {popularToggle && (
-            <Switch disabled onChange={onFollowerChange}/>)
-            }
+            {!popularToggle && <Switch onChange={onFollowerChange} />}
+            {popularToggle && <Switch disabled onChange={onFollowerChange} />}
             <h3 className="comments-title">Reviews</h3>
             <div className="comments-container">
                 {mediaComments.map((c) => (
