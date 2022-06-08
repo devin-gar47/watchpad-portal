@@ -36,88 +36,75 @@ const DurationComments = (currentPosition) => {
 
     const getComments = async (event) => {
         try {
-            const response = await axios
-                .get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
-                )
-                dispatch(setDurationComments(response.data))
-                
-                console.log("SHOULD BE RETURN", response.data)
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
+            )
+            dispatch(setDurationComments(response.data))
 
-        
+            console.log('SHOULD BE RETURN', response.data)
+
             dispatch(setRealTimeComments([]))
         } catch (e) {
-           
-
-            console.log("error",e)
+            console.log('error', e)
         }
     }
 
-   
-   const initializeCommentStack = () => {
-
-   (durationComments.map((c) => (
-        commentStack.push(c))
-        
-    ))
-    setisStackEmpty(false)
-    setDoneInitializing(true)
-    console.log("initialized commentStack", commentStack)
-
-   }
+    const initializeCommentStack = () => {
+        durationComments.map((c) => commentStack.push(c))
+        setisStackEmpty(false)
+        setDoneInitializing(true)
+        console.log('initialized commentStack', commentStack)
+    }
 
     useEffect(() => {
-       
         getComments()
     }, [])
 
     //creates new commentStack from durationComments
     useEffect(() => {
-       if(isStackEmpty && !doneInitializing){
-           initializeCommentStack()
-       }   
-
-       
+        if (isStackEmpty && !doneInitializing) {
+            initializeCommentStack()
+        }
     }, [isStackEmpty, currentPosition, isCurrentComment])
-    
+
     //sets current comment by popping last one off the stack (has the lowest duration time)
     useEffect(() => {
-        if(!isStackEmpty && doneInitializing){
-            if(!isCurrentComment && commentStack.length >0){
+        if (!isStackEmpty && doneInitializing) {
+            if (!isCurrentComment && commentStack.length > 0) {
                 setCurrentComment(commentStack.pop())
-                console.log("Grabbed a new comment!", commentStack.pop())
+                console.log('Grabbed a new comment!', commentStack.pop())
                 setisCurrentComment(true)
             }
-            
-            
         }
-       
+    }, [isCurrentComment, doneInitializing])
 
-    },[isCurrentComment, doneInitializing])
-
-    //just logging 
+    //just logging
     useEffect(() => {
-        if(isCurrentComment){
-            console.log("Comment time:", currentComment.duration_timestamp)
-            console.log("Duration bar time:", currentPosition)
-            
-    }
+        if (isCurrentComment) {
+            console.log('Comment time:', currentComment.duration_timestamp)
+            console.log('Duration bar time:', currentPosition)
+        }
     }, [currentPosition, isCurrentComment])
 
-    //if the times match , we have to display the commment, then say we need a new current Comment. 
-    useEffect(()=> {
-        if(isCurrentComment && 
-            (parseInt(String(currentComment.duration_timestamp)) == parseInt(String(currentPosition.currentPosition)) || 
-                parseInt(String(currentComment.duration_timestamp)) < parseInt(String(currentPosition.currentPosition))
-                )
-            ) 
-            {
-            console.log("THEY MATCH!",currentComment.duration_timestamp, "and", currentPosition)
-            console.log("COMMENT CONTENT:",currentComment.content)
+    //if the times match , we have to display the commment, then say we need a new current Comment.
+    useEffect(() => {
+        if (
+            isCurrentComment &&
+            (parseInt(String(currentComment.duration_timestamp)) ==
+                parseInt(String(currentPosition.currentPosition)) ||
+                parseInt(String(currentComment.duration_timestamp)) <
+                    parseInt(String(currentPosition.currentPosition)))
+        ) {
+            console.log(
+                'THEY MATCH!',
+                currentComment.duration_timestamp,
+                'and',
+                currentPosition
+            )
+            console.log('COMMENT CONTENT:', currentComment.content)
             dispatch(myAddRealTimeComment(currentComment))
             setisCurrentComment(false)
         }
-
     }, [currentPosition, isCurrentComment])
 
     const renderDurationCommentGIF = (commentGIFURL) => {
@@ -129,8 +116,6 @@ const DurationComments = (currentPosition) => {
             )
         }
     }
-
-   
 
     return (
         <div>

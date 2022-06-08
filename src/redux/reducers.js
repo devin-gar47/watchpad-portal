@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
     mediaComments: commentSlice,
     durationComments: durationSlice,
     watchlistEntries: watchlistSlice,
-    realTimeComments: realTimeSlice
+    realTimeComments: realTimeSlice,
 })
 
 export default rootReducer

@@ -60,10 +60,8 @@ function DurationBar({ runtime }) {
             const interval = setInterval(() => {
                 setCurrentPosition((prevValue) => parseInt(prevValue) + 1)
             }, 1000)
-            
+
             return () => clearInterval(interval)
-            
-           
         }
     }, [isPaused])
 
@@ -139,9 +137,7 @@ function DurationBar({ runtime }) {
             </Row>
             <Container>
                 <Row>
-                    <DurationComments
-                        currentPosition={currentPosition}
-                    />
+                    <DurationComments currentPosition={currentPosition} />
                     <DurationCommentBox currentPosition={currentPosition} />
                 </Row>
             </Container>
