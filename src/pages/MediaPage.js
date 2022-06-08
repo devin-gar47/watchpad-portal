@@ -107,15 +107,10 @@ function MediaPage() {
 
             <Content style={{ padding: '0 10px' }}>
                 <Row>
-                    <Col lg={6}>
+                    <Col lg={11}>
                         <CommentDisplay />
                     </Col>
-                    <Col
-                        className="d-flex align-items-center justify-content-center"
-                        lg={6}
-                    >
-                        <h2>Reserved for live feed chat...</h2>
-                    </Col>
+                    
                 </Row>
 
                 <DurationBar runtime={runtime} />

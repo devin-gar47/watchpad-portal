@@ -68,7 +68,7 @@ const CommentDisplay = (mediaId) => {
             <h8> Most Popular</h8>
             {!followerToggle && <Switch onChange={onPopularChange} />}
             {followerToggle && <Switch disabled onChange={onPopularChange} />}
-            <h8>By Followers</h8>
+            <h8>By Following</h8>
             {!popularToggle && <Switch onChange={onFollowerChange} />}
             {popularToggle && <Switch disabled onChange={onFollowerChange} />}
             <h3 className="comments-title">Reviews</h3>
