@@ -64,15 +64,17 @@ const DurationComments = (currentPosition) => {
     useEffect(() => {
         if (isStackEmpty && !doneInitializing) {
             initializeCommentStack()
+            console.log('INITIALIZING THE STACK')
         }
-    }, [isStackEmpty, currentPosition, isCurrentComment])
+    }, [])
 
     //sets current comment by popping last one off the stack (has the lowest duration time)
+    //stack cannot be empty and current comment must be false
     useEffect(() => {
         if (!isStackEmpty && doneInitializing) {
             if (!isCurrentComment && commentStack.length > 0) {
                 setCurrentComment(commentStack.pop())
-                console.log('Grabbed a new comment!', commentStack.pop())
+                console.log('Grabbed a new comment!', currentComment)
                 setisCurrentComment(true)
             }
         }
@@ -83,17 +85,17 @@ const DurationComments = (currentPosition) => {
         if (isCurrentComment) {
             console.log('Comment time:', currentComment.duration_timestamp)
             console.log('Duration bar time:', currentPosition)
+            console.log(commentStack)
         }
     }, [currentPosition, isCurrentComment])
 
     //if the times match , we have to display the commment, then say we need a new current Comment.
+    //currentComment must be true and times must match
     useEffect(() => {
         if (
             isCurrentComment &&
-            (parseInt(String(currentComment.duration_timestamp)) ==
-                parseInt(String(currentPosition.currentPosition)) ||
-                parseInt(String(currentComment.duration_timestamp)) <
-                    parseInt(String(currentPosition.currentPosition)))
+            parseInt(String(currentComment.duration_timestamp)) ==
+                parseInt(String(currentPosition.currentPosition))
         ) {
             console.log(
                 'THEY MATCH!',
@@ -119,18 +121,20 @@ const DurationComments = (currentPosition) => {
 
     return (
         <div>
-            <h8>Most Popular </h8>
-            <Switch onChange={getComments} />
             <List
                 className="comment-list"
-                header={`${0} replies`}
+                header={`${durationComments.length} replies`}
                 itemLayout="horizontal"
                 dataSource={realTimeComments}
                 renderItem={(item) => (
                     <li>
                         <Comment
                             // actions={actions}
-                            author={item.user.username}
+                            author={
+                                <a href={`/${item.user.username}/user-info`}>
+                                    {item.user.username}
+                                </a>
+                            }
                             // avatar={item.user.photo}
                             content={
                                 <>
