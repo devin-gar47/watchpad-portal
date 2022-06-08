@@ -64,7 +64,7 @@ const DurationComments = (currentPosition) => {
     useEffect(() => {
         if (isStackEmpty && !doneInitializing) {
             initializeCommentStack()
-            console.log("INITIALIZING THE STACK")
+            console.log('INITIALIZING THE STACK')
         }
     }, [])
 
@@ -95,9 +95,8 @@ const DurationComments = (currentPosition) => {
         if (
             isCurrentComment &&
             parseInt(String(currentComment.duration_timestamp)) ==
-                parseInt(String(currentPosition.currentPosition)) 
-        )
-         {
+                parseInt(String(currentPosition.currentPosition))
+        ) {
             console.log(
                 'THEY MATCH!',
                 currentComment.duration_timestamp,
@@ -122,7 +121,6 @@ const DurationComments = (currentPosition) => {
 
     return (
         <div>
-            
             <List
                 className="comment-list"
                 header={`${durationComments.length} replies`}
@@ -132,7 +130,11 @@ const DurationComments = (currentPosition) => {
                     <li>
                         <Comment
                             // actions={actions}
-                            author= {<a href = {`/${item.user.username}/user-info`}>{item.user.username}</a>}
+                            author={
+                                <a href={`/${item.user.username}/user-info`}>
+                                    {item.user.username}
+                                </a>
+                            }
                             // avatar={item.user.photo}
                             content={
                                 <>

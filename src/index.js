@@ -14,7 +14,8 @@ import { PersistGate } from 'redux-persist/integration/react'
 
 const persistConfig = {
     key: 'root',
-    storage,blacklist:["realTimeComments"]
+    storage,
+    blacklist: ['realTimeComments'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -28,15 +29,13 @@ let persistor = persistStore(myStore)
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-    
-        <BrowserRouter>
-            <Provider store={myStore}>
-                <PersistGate loading={null} persistor={persistor}>
-                    <App />
-                </PersistGate>
-            </Provider>
-        </BrowserRouter>
-  
+    <BrowserRouter>
+        <Provider store={myStore}>
+            <PersistGate loading={null} persistor={persistor}>
+                <App />
+            </PersistGate>
+        </Provider>
+    </BrowserRouter>
 )
 
 // If you want to start measuring performance in your app, pass a function

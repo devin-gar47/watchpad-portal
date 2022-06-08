@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { myAddDurationComment } from '../redux/reducers/duration/durationSlice'
-import{myAddNewRealTimeComment} from '../redux/reducers/duration/realTimeSlice'
+import { myAddNewRealTimeComment } from '../redux/reducers/duration/realTimeSlice'
 import {
     toHoursAndMinutes,
     toHoursMinutesAndSeconds,
@@ -62,7 +62,7 @@ function DurationCommentBox({ currentPosition }) {
                 comment.user.username = userInformation.username
                 if (response.data) {
                     dispatch(myAddDurationComment(response.data))
-                    dispatch( myAddNewRealTimeComment(response.data))
+                    dispatch(myAddNewRealTimeComment(response.data))
                     setDurationGifURL('')
                 } else {
                     console.log('ERROR SAVING COMMENT')
