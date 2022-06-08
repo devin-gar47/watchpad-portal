@@ -66,20 +66,20 @@ function CommentBox() {
     }
 
     const renderChosenReviewGIF = () => {
-        if(gifURL.length>0){
+        if (gifURL.length > 0) {
             return (
                 <img
-                src={`${gifURL}`} //shows the user's current chosen GIF, if any
-            />
-        )
+                    src={`${gifURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
         }
-            }
+    }
 
     return (
         <div>
             <br />
 
-{renderChosenReviewGIF()}
+            {renderChosenReviewGIF()}
 
             <div className="text-center">
                 <form>

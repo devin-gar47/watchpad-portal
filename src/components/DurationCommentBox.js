@@ -47,7 +47,7 @@ function DurationCommentBox({ currentPosition }) {
             content: newComment,
             spoiler: true,
             review: false,
-            gifURL: durationGifURL
+            gifURL: durationGifURL,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
@@ -70,13 +70,13 @@ function DurationCommentBox({ currentPosition }) {
     }
 
     const renderChosenGIF = () => {
-if(durationGifURL.length>0){
-    return (
-    <img
-    src={`${durationGifURL}`} //shows the user's current chosen GIF, if any
-/>
-)
-}
+        if (durationGifURL.length > 0) {
+            return (
+                <img
+                    src={`${durationGifURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
+        }
     }
 
     return (
@@ -105,19 +105,18 @@ if(durationGifURL.length>0){
                     </Button>
 
                     <Button
-                            variant="primary"
-                            onClick={() => setDurationModalShow(true)}
-                        >
-                            +GIF
-                        </Button>
+                        variant="primary"
+                        onClick={() => setDurationModalShow(true)}
+                    >
+                        +GIF
+                    </Button>
 
-                        <GIFModal
-                            show={durationModalShow}
-                            onHide={() => setDurationModalShow(false)}
-                            gifURL={durationGifURL}
-                            setgifURL={setDurationGifURL}
-                        />
-
+                    <GIFModal
+                        show={durationModalShow}
+                        onHide={() => setDurationModalShow(false)}
+                        gifURL={durationGifURL}
+                        setgifURL={setDurationGifURL}
+                    />
                 </form>
             </div>
             <br />

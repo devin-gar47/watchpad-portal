@@ -84,15 +84,14 @@ const DurationComments = (mediaId) => {
     // ]
 
     const renderDurationCommentGIF = (commentGIFURL) => {
-        if(commentGIFURL.length>0){
+        if (commentGIFURL.length > 0) {
             return (
                 <img
-                src={`${commentGIFURL}`} //shows the user's current chosen GIF, if any
-            />
-        )
+                    src={`${commentGIFURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
         }
-            }
-
+    }
 
     return (
         <div>
@@ -111,14 +110,10 @@ const DurationComments = (mediaId) => {
                             // avatar={item.user.photo}
                             content={
                                 <>
-                                <div>
-
-                        {renderDurationCommentGIF(item.gifURL)}
-
-</div>
-<div>
-                                {item.content}
-                                </div>
+                                    <div>
+                                        {renderDurationCommentGIF(item.gifURL)}
+                                    </div>
+                                    <div>{item.content}</div>
                                 </>
                             }
                             datetime={item.comment_timestamp}
