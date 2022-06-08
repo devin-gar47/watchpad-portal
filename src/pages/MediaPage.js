@@ -110,7 +110,6 @@ function MediaPage() {
                     <Col lg={11}>
                         <CommentDisplay />
                     </Col>
-                    
                 </Row>
 
                 <DurationBar runtime={runtime} />
