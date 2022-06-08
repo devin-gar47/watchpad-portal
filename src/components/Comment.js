@@ -144,6 +144,16 @@ const Comment = ({ comment }) => {
         return <div>{comment.content}</div>
     }
 
+    const renderDurationCommentGIF = (reviewGIFURL) => {
+        if (reviewGIFURL.length > 0) {
+            return (
+                <img
+                    src={`${reviewGIFURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
+        }
+    }
+
     return (
         <div className="comment">
             <div className="comment-image-container">
@@ -161,9 +171,7 @@ const Comment = ({ comment }) => {
                         <ShowSpoilerButton />
                     </div>
                 </div>
-                <img
-                    src={`${comment.gifURL}`} //shows the user's current chosen GIF, if any
-                />
+                {renderDurationCommentGIF(comment.gifURL)}
                 <div className="comment-text">
                     {isSpoilerGuardOn ? (
                         <Alert

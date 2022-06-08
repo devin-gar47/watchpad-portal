@@ -8,12 +8,15 @@ import {
     toHoursAndMinutes,
     toHoursMinutesAndSeconds,
 } from '../utils/time-utils'
+import GIFModal from './GIFModal'
 
 function DurationCommentBox({ currentPosition }) {
     let params = useParams()
     const dispatch = useDispatch()
 
     const userInformation = useSelector((store) => store.userInformation)
+    const [durationModalShow, setDurationModalShow] = useState(false)
+    const [durationGifURL, setDurationGifURL] = useState('')
 
     //const [comments, setComments] = useState([]) //state that stores the new inputs in an array
     const [newComment, setNewComment] = useState('') //short term memory to remember what is typed into input area(text area)
@@ -34,7 +37,7 @@ function DurationCommentBox({ currentPosition }) {
     var stringDate = date.toString()
     var stringDuration = toHoursMinutesAndSeconds(currentPosition).toString()
 
-    const addComment = (event) => {
+    const addDurationComment = (event) => {
         event.preventDefault()
         const comment = {
             media: { id: params.movieId },
@@ -44,6 +47,7 @@ function DurationCommentBox({ currentPosition }) {
             content: newComment,
             spoiler: true,
             review: false,
+            gifURL: durationGifURL,
         }
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
@@ -54,6 +58,7 @@ function DurationCommentBox({ currentPosition }) {
                 comment.user.username = userInformation.username
                 if (response.data) {
                     dispatch(myAddDurationComment(response.data))
+                    setDurationGifURL('')
                 } else {
                     console.log('ERROR SAVING COMMENT')
                 }
@@ -64,9 +69,21 @@ function DurationCommentBox({ currentPosition }) {
         setNewComment('') //clears the text area back to empty after submitting
     }
 
+    const renderChosenGIF = () => {
+        if (durationGifURL.length > 0) {
+            return (
+                <img
+                    src={`${durationGifURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
+        }
+    }
+
     return (
         <div className="">
             <br />
+
+            {renderChosenGIF()}
 
             <div>
                 <form>
@@ -80,12 +97,26 @@ function DurationCommentBox({ currentPosition }) {
                     <br />
 
                     <Button
-                        onClick={(e) => addComment(e)}
+                        onClick={(e) => addDurationComment(e)}
                         type="submit"
                         className="yellow"
                     >
                         Post Comment
                     </Button>
+
+                    <Button
+                        variant="primary"
+                        onClick={() => setDurationModalShow(true)}
+                    >
+                        +GIF
+                    </Button>
+
+                    <GIFModal
+                        show={durationModalShow}
+                        onHide={() => setDurationModalShow(false)}
+                        gifURL={durationGifURL}
+                        setgifURL={setDurationGifURL}
+                    />
                 </form>
             </div>
             <br />

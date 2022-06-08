@@ -20,7 +20,7 @@ const CommentGIFs = (props) => {
                     {
                         params: {
                             api_key: process.env.REACT_APP_GIPHY_APIKEY,
-                            limit: 8,
+                            limit: 50,
                             rating: 'g',
                         },
                     }
@@ -90,7 +90,7 @@ const CommentGIFs = (props) => {
             const result = await axios('https://api.giphy.com/v1/gifs/search', {
                 params: {
                     api_key: process.env.REACT_APP_GIPHY_APIKEY,
-                    limit: 6,
+                    limit: 50,
                     rating: 'g',
                     lang: 'en',
                     q: search,

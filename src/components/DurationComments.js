@@ -83,6 +83,16 @@ const DurationComments = (mediaId) => {
     //     </Tooltip>,
     // ]
 
+    const renderDurationCommentGIF = (commentGIFURL) => {
+        if (commentGIFURL.length > 0) {
+            return (
+                <img
+                    src={`${commentGIFURL}`} //shows the user's current chosen GIF, if any
+                />
+            )
+        }
+    }
+
     return (
         <div>
             <h8>Most Popular </h8>
@@ -98,7 +108,14 @@ const DurationComments = (mediaId) => {
                             // actions={actions}
                             author={item.user.username}
                             // avatar={item.user.photo}
-                            content={item.content}
+                            content={
+                                <>
+                                    <div>
+                                        {renderDurationCommentGIF(item.gifURL)}
+                                    </div>
+                                    <div>{item.content}</div>
+                                </>
+                            }
                             datetime={item.comment_timestamp}
                         />
                         <div style={{ width: '110px', margin: '8px' }}>
