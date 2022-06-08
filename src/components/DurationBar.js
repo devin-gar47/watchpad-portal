@@ -60,7 +60,10 @@ function DurationBar({ runtime }) {
             const interval = setInterval(() => {
                 setCurrentPosition((prevValue) => parseInt(prevValue) + 1)
             }, 1000)
+            
             return () => clearInterval(interval)
+            
+           
         }
     }, [isPaused])
 
@@ -137,7 +140,6 @@ function DurationBar({ runtime }) {
             <Container>
                 <Row>
                     <DurationComments
-                        mediaId={params.movieId}
                         currentPosition={currentPosition}
                     />
                     <DurationCommentBox currentPosition={currentPosition} />
