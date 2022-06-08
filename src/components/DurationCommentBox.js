@@ -35,15 +35,18 @@ function DurationCommentBox({ currentPosition }) {
         currentDate.getSeconds()
 
     var stringDate = date.toString()
-    var stringDuration = toHoursMinutesAndSeconds(currentPosition).toString()
+    var intDuration = currentPosition
 
     const addDurationComment = (event) => {
         event.preventDefault()
         const comment = {
             media: { id: params.movieId },
-            user: { id: userInformation.id },
+            user: {
+                id: userInformation.id,
+                username: userInformation.username,
+            },
             comment_timestamp: stringDate,
-            duration_timestamp: stringDuration,
+            duration_timestamp: intDuration,
             content: newComment,
             spoiler: true,
             review: false,
@@ -52,7 +55,7 @@ function DurationCommentBox({ currentPosition }) {
         axios
             .post(`${process.env.REACT_APP_API_BASE_URL}/api/comments`, comment)
             .then((response) => {
-                console.log(stringDuration)
+                console.log(intDuration)
                 console.log(response.data)
                 console.log('Comment Added!')
                 comment.user.username = userInformation.username

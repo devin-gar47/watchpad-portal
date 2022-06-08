@@ -24,28 +24,17 @@ const DurationComments = (mediaId) => {
     const dispatch = useDispatch()
 
     const getComments = async (checked) => {
-        if (checked == false) {
-            try {
-                const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get?mediaId=${params.movieId}`
-                )
-                console.log(response.data)
-                dispatch(setDurationComments(response.data))
-            } catch (e) {
-                console.log(e)
-            }
-        } else {
-            try {
-                const response = await axios.get(
-                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-most-liked?mediaId=${params.movieId}`
-                )
-                console.log(response.data)
-                dispatch(setDurationComments(response.data))
-            } catch (e) {
-                console.log(e)
-            }
+        try {
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
+            )
+            console.log(response.data)
+            dispatch(setDurationComments(response.data))
+        } catch (e) {
+            console.log(e)
         }
     }
+
     useEffect(() => {
         getComments()
     }, [])
