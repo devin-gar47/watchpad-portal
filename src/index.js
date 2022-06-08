@@ -15,7 +15,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 const persistConfig = {
     key: 'root',
     storage,
-    blacklist: ['realTimeComments'],
+    blacklist: ['realTimeComments', 'durationComments'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

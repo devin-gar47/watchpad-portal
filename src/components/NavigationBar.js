@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Form, NavDropdown } from 'react-bootstrap'
+import { Button, Form, NavDropdown, NavLink } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
@@ -56,13 +56,7 @@ function NavigationBar() {
             fixed="top"
         >
             <Navbar.Brand className="d-flex align-items-center">
-                <p
-                    className="m-0 me-3"
-                    style={{ cursor: 'pointer' }}
-                    onClick={() => navigate('/')}
-                >
-                    WatchPad
-                </p>
+                <Nav.Link href="/">WatchPad</Nav.Link>
                 <Form
                     onSubmit={(e) => handleSubmit(e)}
                     style={{ position: 'relative' }}
