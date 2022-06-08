@@ -26,6 +26,7 @@ const DurationComments = (currentPosition) => {
     const [isStackEmpty, setisStackEmpty] = useState(true)
     const [isCurrentComment, setisCurrentComment] = useState(false)
     const [doneInitializing, setDoneInitializing] = useState(false)
+    const [gotDurationComments, setGotDurationComments] = useState(false)
     const durationComments = useSelector((store) => store.durationComments)
     const realTimeComments = useSelector((store) => store.realTimeComments)
     const [commentStack, setCommentStack] = useState([])
@@ -40,16 +41,17 @@ const DurationComments = (currentPosition) => {
                 `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
             )
             dispatch(setDurationComments(response.data))
-
+            setGotDurationComments(true)
             console.log('SHOULD BE RETURN', response.data)
 
-            dispatch(setRealTimeComments([]))
+            // dispatch(setRealTimeComments([]))
         } catch (e) {
             console.log('error', e)
         }
     }
 
     const initializeCommentStack = () => {
+        console.log(`DURATION COMMENTS: ${durationComments}`)
         durationComments.map((c) => commentStack.push(c))
         setisStackEmpty(false)
         setDoneInitializing(true)
@@ -62,11 +64,11 @@ const DurationComments = (currentPosition) => {
 
     //creates new commentStack from durationComments
     useEffect(() => {
-        if (isStackEmpty && !doneInitializing) {
+        if (isStackEmpty && !doneInitializing && gotDurationComments) {
             initializeCommentStack()
             console.log('INITIALIZING THE STACK')
         }
-    }, [])
+    }, [gotDurationComments])
 
     //sets current comment by popping last one off the stack (has the lowest duration time)
     //stack cannot be empty and current comment must be false
