@@ -4,6 +4,10 @@ import { useParams } from 'react-router-dom'
 import 'antd/dist/antd.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { setDurationComments } from '../redux/reducers/duration/durationSlice'
+import {
+    setRealTimeComments,
+    myAddRealTimeComment,
+} from '../redux/reducers/duration/realTimeSlice'
 import LikeDislikeComment from './LikeDislikeComment'
 import { Switch } from 'antd'
 
@@ -16,61 +20,53 @@ import {
     LikeFilled,
 } from '@ant-design/icons'
 
-const DurationComments = (mediaId) => {
+const DurationComments = (mediaId, currentPosition) => {
     let params = useParams()
     //const [comment, setComment] = useState([])
+    const [currentComment, setCurrentComment] = useState(null)
     const durationComments = useSelector((store) => store.durationComments)
+    const realTimeComments = useSelector((store) => store.realTimeComments)
+    const [commentStack, setCommentStack] = useState([])
+    var newArray = []
+    var currComment = null
 
     const dispatch = useDispatch()
 
     const getComments = async (checked) => {
         try {
-            const response = await axios.get(
-                `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
-            )
-            console.log(response.data)
+            const response = await axios
+                .get(
+                    `${process.env.REACT_APP_API_BASE_URL}/api/comments/get-duration-comments-by-media-sorted?mediaId=${params.movieId}`
+                )
+                .then((response) => {
+                    return response.data
+                })
+
             dispatch(setDurationComments(response.data))
+            dispatch(setRealTimeComments([]))
         } catch (e) {
+            //setCommentStack(response.data)
+
             console.log(e)
         }
     }
 
+    const createCommentStack = () => {
+        for (const obj of durationComments) {
+            newArray.push(obj)
+        }
+        console.log(newArray)
+        return newArray
+    }
+
     useEffect(() => {
         getComments()
+        createCommentStack()
     }, [])
 
-    // const [likes, setLikes] = useState(0)
-    // const [dislikes, setDislikes] = useState(0)
-    // const [action, setAction] = useState(null)
-
-    // const like = () => {
-    //     setLikes(1)
-    //     setDislikes(0)
-    //     setAction('liked')
-    // }
-
-    // const dislike = () => {
-    //     setLikes(0)
-    //     setDislikes(1)
-    //     setAction('disliked')
-    // }
-
-    // const actions = [
-    //     <Tooltip key="comment-basic-like" title="Like">
-    //         <span onClick={like}>
-    //             {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-    //             <span className="comment-action">{likes}</span>
-    //         </span>
-    //     </Tooltip>,
-    //     <Tooltip key="comment-basic-dislike" title="Dislike">
-    //         <span onClick={dislike}>
-    //             {React.createElement(
-    //                 action === 'disliked' ? DislikeFilled : DislikeOutlined
-    //             )}
-    //             <span className="comment-action">{dislikes}</span>
-    //         </span>
-    //     </Tooltip>,
-    // ]
+    useEffect(() => {
+        displayRealTime()
+    }, [currentPosition])
 
     const renderDurationCommentGIF = (commentGIFURL) => {
         if (commentGIFURL?.length > 0) {
@@ -82,15 +78,31 @@ const DurationComments = (mediaId) => {
         }
     }
 
+    function displayRealTime() {
+        console.log('THIS IS THE COMMENT ARRAY:', newArray)
+        /*
+        if (currComment == null) {
+            currComment = newArray.pop()
+            console.log(currComment)
+            if (
+                currComment.duration_timestamp == currentPosition ||
+                currComment.duration_timestamp == currentPosition - 1
+            ) {
+                dispatch(myAddRealTimeComment(currComment))
+                currComment = null
+            }
+        }*/
+    }
+
     return (
         <div>
             <h8>Most Popular </h8>
             <Switch onChange={getComments} />
             <List
                 className="comment-list"
-                header={`${durationComments.length} replies`}
+                header={`${0} replies`}
                 itemLayout="horizontal"
-                dataSource={durationComments}
+                dataSource={realTimeComments}
                 renderItem={(item) => (
                     <li>
                         <Comment

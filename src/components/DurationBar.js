@@ -136,7 +136,10 @@ function DurationBar({ runtime }) {
             </Row>
             <Container>
                 <Row>
-                    <DurationComments mediaId={params.movieId} />
+                    <DurationComments
+                        mediaId={params.movieId}
+                        currentPosition={currentPosition}
+                    />
                     <DurationCommentBox currentPosition={currentPosition} />
                 </Row>
             </Container>
